@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Mail } from "lucide-react";
 
 const footerLinks = [
@@ -10,6 +11,7 @@ const footerLinks = [
   { label: "Tokenomics", href: "#tokenomics" },
   { label: "FAQ", href: "#faq" },
   { label: "Download", href: "#download" },
+  { label: "Terms", href: "/terms" },
 ];
 
 const socials = [
@@ -53,16 +55,26 @@ export default function Footer() {
 
           {/* Links */}
           <div className="flex flex-wrap gap-6 w-1/2 justify-center">
-            {footerLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={(e) => handleClick(e, link.href)}
-                className="text-sm text-foreground/50 hover:text-nam-green transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
+            {footerLinks.map((link) =>
+              link.href.startsWith("/") ? (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="text-sm text-foreground/50 hover:text-nam-green transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={(e) => handleClick(e, link.href)}
+                  className="text-sm text-foreground/50 hover:text-nam-green transition-colors"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
           </div>
 
           {/* Socials */}
@@ -85,12 +97,12 @@ export default function Footer() {
           <p className="text-xs text-foreground/30">
             &copy; {new Date().getFullYear()} NAM Rewards. All rights reserved.
           </p>
-          <a
-            href="https://www.nam.xyz/terms"
+          <Link
+            href="/terms"
             className="text-xs text-foreground/30 hover:text-nam-green transition-colors"
           >
             Terms of Use
-          </a>
+          </Link>
           <p className="text-xs text-foreground/20">
             NAM Coins are Non-Automated Mined tokens.
           </p>

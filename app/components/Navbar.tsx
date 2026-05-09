@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -56,6 +57,10 @@ export default function Navbar() {
   }, [mobileOpen]);
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("/")) {
+      setMobileOpen(false);
+      return;
+    }
     e.preventDefault();
     setMobileOpen(false);
     const target = document.querySelector(href);
@@ -94,6 +99,12 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
+            <Link
+              href="/terms"
+              className="text-sm text-foreground/70 hover:text-nam-green transition-colors duration-200"
+            >
+              Terms
+            </Link>
             <a
               href="#download"
               onClick={(e) => handleLinkClick(e, "#download")}
@@ -127,6 +138,13 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+          <Link
+            href="/terms"
+            onClick={() => setMobileOpen(false)}
+            className="text-2xl font-medium text-foreground/80 hover:text-nam-green transition-colors"
+          >
+            Terms
+          </Link>
           <a
             href="#download"
             onClick={(e) => handleLinkClick(e, "#download")}
