@@ -82,8 +82,10 @@ export default function Tokenomics() {
             <span className="text-gradient-green">Tokenomics</span>
           </h2>
           <p className="mt-4 text-foreground/50 text-base md:text-lg max-w-2xl mx-auto">
-            14.4 million total tokens. Transparent, on-chain, and
-            community-driven distribution.
+          The tokenomics are modeled after Dogecoin. The only difference is the way they&apos;re mined — it&apos;s
+not through automated processors in data centers. Instead, Non-Automated Mined (NAM)
+tokens are different. They&apos;re mined through your consciousness and where you choose to
+spend your time and money.
           </p>
         </div>
 
@@ -138,7 +140,7 @@ export default function Tokenomics() {
             <div className="token-stats grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="token-stat-card glass rounded-xl p-5">
                 <p className="text-2xl font-bold font-mono text-nam-green">14.4M</p>
-                <p className="text-xs text-foreground/40 mt-1">Total Supply</p>
+                <p className="text-xs text-foreground/40 mt-1">Daily Mined Supply</p>
               </div>
               <div className="token-stat-card glass rounded-xl p-5">
                 <p className="text-2xl font-bold font-mono text-nam-green">7.2M</p>

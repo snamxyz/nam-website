@@ -57,7 +57,7 @@ const faqs = [
   {
     question: "Is my data safe?",
     answer:
-      "Yes. Receipt data is securely processed.",
+      "Yes. Receipt data is securely processed with your privacy in mind.",
   },
 ];
 
