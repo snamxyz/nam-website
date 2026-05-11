@@ -32,7 +32,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 w-full">
           {/* Logo + tagline */}
-          <div className="flex flex-col gap-3 w-1/4">
+          <div className="flex flex-col gap-3 w-1/4 max-lg:items-center max-lg:w-full">
             <a href="#" className="flex items-center gap-3">
               <Image
                 src="/assets/icon.svg"
@@ -45,14 +45,14 @@ export default function Footer() {
                 NAM Rewards
               </span>
             </a>
-            <p className="text-xs text-foreground/40 max-w-xs">
+            <p className="text-xs text-foreground/40 max-w-xs max-lg:text-center">
               Turning everyday purchases into crypto rewards. The universal
               rewards layer for real-world spending.
             </p>
           </div>
 
           {/* Links */}
-          <div className="flex flex-wrap gap-6 w-1/2 justify-center">
+          <div className="flex flex-wrap gap-6 w-1/2 justify-center max-lg:w-full">
             {footerLinks.map((link) => (
               <a
                 key={link.label}
@@ -66,7 +66,7 @@ export default function Footer() {
           </div>
 
           {/* Socials */}
-          <div className="flex gap-3 w-1/4 justify-end">
+          <div className="flex gap-3 w-1/4 justify-end max-lg:justify-center max-lg:w-full">
             {socials.map((social) => (
               <a
                 key={social.label}
