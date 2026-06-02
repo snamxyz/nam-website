@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum CampaignStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+}
+
+enum ConversionType {
+  SIGNUP
+  FIRST_RECEIPT_VERIFIED
+  SECOND_RECEIPT_VERIFIED
+}
+
+enum ClickEventType {
+  REFERRAL_LANDING
+  DOWNLOAD_IOS
+  DOWNLOAD_ANDROID
+}
+
+model Campaign {
+  id              String         @id @default(cuid())
+  name            String
+  status          CampaignStatus @default(DRAFT)
+  budget          Decimal        @default(0) @db.Decimal(12, 2)
+  slug            String         @unique
+  xProfileUrl     String
+  xHandle         String
+  profileImageUrl String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  clickLogs        ClickLog[]
+  conversionEvents ConversionEvent[]
+}
+
+model ClickLog {
+  id         String         @id @default(cuid())
+  campaignId String
+  slug       String
+  eventType  ClickEventType
+  timestamp  DateTime       @default(now())
+  userAgent  String?
+  deviceType String?
+  os         String?
+  browser    String?
+  referrer   String?
+  ipHash     String
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@index([slug])
+  @@index([eventType])
+  @@index([timestamp])
+}
+
+model ConversionEvent {
+  id             String         @id @default(cuid())
+  type           ConversionType
+  campaignId     String
+  slug           String
+  timestamp      DateTime       @default(now())
+  externalUserId String?
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@index([slug])
+  @@index([type, slug, externalUserId])
+}

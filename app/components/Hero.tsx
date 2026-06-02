@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
+import DownloadButton from "@/app/components/DownloadButton";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -276,8 +277,8 @@ export default function Hero() {
 
           {/* CTAs */}
           <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-4">
-            <a
-              href="https://apps.apple.com/us/app/nam-rewards/id6757811340"
+            <DownloadButton
+              platform="ios"
               className="hero-cta group relative px-8 py-3.5 bg-nam-green text-black font-semibold rounded-2xl hover:brightness-110 transition-all duration-200 text-center overflow-hidden"
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
@@ -297,13 +298,13 @@ export default function Hero() {
                 </svg>
               </span>
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            </a>
-            <a
-              href="https://play.google.com/store/apps/details?id=xyz.nam.namrewards"
+            </DownloadButton>
+            <DownloadButton
+              platform="android"
               className="hero-cta px-8 py-3.5 border border-nam-border text-foreground/70 font-medium rounded-2xl hover:border-nam-green/30 hover:text-foreground hover:bg-nam-green/5 transition-all duration-200 text-center"
             >
               Download for Android
-            </a>
+            </DownloadButton>
           </div>
 
           {/* Stats strip */}

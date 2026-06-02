@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Apple, Smartphone } from "lucide-react";
+import DownloadButton from "@/app/components/DownloadButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,20 +52,20 @@ export default function CTA() {
         </p>
 
         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="https://apps.apple.com/us/app/nam-rewards/id6757811340"
+          <DownloadButton
+            platform="ios"
             className="group relative px-8 py-3.5 bg-nam-green text-black font-semibold rounded-2xl hover:brightness-110 transition-all duration-200 text-center overflow-hidden flex items-center justify-center gap-2 glow-green"
           >
             <Apple className="w-5 h-5" />
             Download for iOS
-          </a>
-          <a
-            href="https://play.google.com/store/apps/details?id=xyz.nam.namrewards"
+          </DownloadButton>
+          <DownloadButton
+            platform="android"
             className="px-8 py-3.5 border border-nam-border text-foreground/70 font-medium rounded-2xl hover:border-nam-green/30 hover:text-foreground hover:bg-nam-green/5 transition-all duration-200 text-center flex items-center justify-center gap-2"
           >
             <Smartphone className="w-5 h-5" />
             Download for Android
-          </a>
+          </DownloadButton>
         </div>
 
         <p className="mt-4 text-xs text-foreground/30">
