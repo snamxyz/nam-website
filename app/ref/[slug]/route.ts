@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ClickEventType } from "@/generated/prisma/client";
+import { getReferralRedirectUrl } from "@/lib/constants";
 import {
   getClientIp,
+  getReferralRedirectTarget,
   logCampaignClick,
   REFERRAL_COOKIE_MAX_AGE,
   REFERRAL_COOKIE_NAME,
@@ -31,7 +33,13 @@ export async function GET(
     ip,
   });
 
-  const response = NextResponse.redirect(new URL("/", request.url), 302);
+  const redirectTarget = getReferralRedirectTarget(userAgent);
+  const destination = getReferralRedirectUrl(
+    redirectTarget,
+    slug,
+    request.url,
+  );
+  const response = NextResponse.redirect(destination, 302);
   response.cookies.set(REFERRAL_COOKIE_NAME, slug, {
     path: "/",
     maxAge: REFERRAL_COOKIE_MAX_AGE,

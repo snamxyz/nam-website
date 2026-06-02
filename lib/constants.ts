@@ -28,6 +28,23 @@ export function getTrackingUrl(slug: string): string {
   return `${getSiteUrl()}/ref/${slug}`;
 }
 
+import type { ReferralRedirectTarget } from "@/lib/referral-redirect";
+
+export function getReferralRedirectUrl(
+  target: ReferralRedirectTarget,
+  slug: string,
+  requestUrl: string,
+): URL {
+  switch (target) {
+    case "android":
+      return new URL(getPlayStoreUrl(slug));
+    case "ios":
+      return new URL(APP_STORE_URL);
+    case "desktop":
+      return new URL("/", requestUrl);
+  }
+}
+
 export const SLUG_PATTERN = /^[a-z0-9][a-z0-9-]{0,62}[a-z0-9]$/;
 
 export function isValidSlug(slug: string): boolean {

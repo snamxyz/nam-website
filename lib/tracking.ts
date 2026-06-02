@@ -42,6 +42,9 @@ export function hashIp(ip: string): string {
   return createHash("sha256").update(`${ip}:${salt}`).digest("hex");
 }
 
+export type { ReferralRedirectTarget } from "@/lib/referral-redirect";
+export { getReferralRedirectTarget } from "@/lib/referral-redirect";
+
 export function parseUserAgent(userAgent: string | null) {
   const parser = new UAParser(userAgent ?? undefined);
   const result = parser.getResult();
