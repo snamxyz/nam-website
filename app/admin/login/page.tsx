@@ -12,7 +12,7 @@ export default async function AdminLoginPage({
       <div className="w-full max-w-sm rounded-2xl border border-nam-border bg-nam-card p-8">
         <h1 className="text-xl font-semibold">Admin Login</h1>
         <p className="mt-2 text-sm text-foreground/60">
-          Sign in to manage influencer campaigns.
+          Sign in with your admin password to manage influencer campaigns.
         </p>
         <div className="mt-6">
           <LoginForm nextPath={next} />

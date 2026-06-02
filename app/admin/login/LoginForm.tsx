@@ -9,19 +9,25 @@ export default function LoginForm({ nextPath }: { nextPath?: string }) {
   const [state, formAction, pending] = useActionState(loginAction, initialState);
 
   return (
-    <form action={formAction} className="space-y-4">
+    <form action={formAction} className="space-y-4" autoComplete="off">
       {nextPath ? <input type="hidden" name="next" value={nextPath} /> : null}
       <div>
-        <label htmlFor="password" className="mb-1 block text-sm text-foreground/70">
+        <label htmlFor="admin-password" className="mb-1 block text-sm text-foreground/70">
           Admin password
         </label>
         <input
-          id="password"
+          id="admin-password"
           name="password"
           type="password"
           required
+          autoComplete="off"
+          inputMode="text"
+          placeholder="Enter admin password"
           className="w-full rounded-lg border border-nam-border bg-black/40 px-3 py-2 text-sm outline-none focus:border-nam-green"
         />
+        <p className="mt-1 text-xs text-foreground/50">
+          Password only — no email required.
+        </p>
       </div>
       {state.error ? (
         <p className="text-sm text-red-400">{state.error}</p>
