@@ -1,14 +1,30 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
+import {
+  archiveCampaign,
+  refreshCampaignVideosAction,
+  refreshVideoMetricsAction,
+  restoreCampaign,
+} from "@/app/admin/actions";
 import CopyLinkButton from "@/app/admin/components/CopyLinkButton";
 import { getTrackingUrl } from "@/lib/constants";
-import { prisma } from "@/lib/db";
+import { formatPlatform } from "@/lib/profile";
 import {
   formatCurrency,
   formatPercent,
   formatRatio,
+  getCampaignVideoStats,
   getCampaignStats,
 } from "@/lib/stats";
+
+function formatDate(date: Date | null): string {
+  return date ? date.toLocaleDateString() : "—";
+}
+
+function formatDateTime(date: Date | null): string {
+  return date ? date.toLocaleString() : "Never";
+}
 
 export default async function CampaignDetailPage({
   params,
@@ -16,47 +32,67 @@ export default async function CampaignDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const campaign = await prisma.campaign.findUnique({ where: { id } });
-  if (!campaign) notFound();
-
   const stats = await getCampaignStats(id);
   if (!stats) notFound();
+  const videos = await getCampaignVideoStats(id);
 
-  const trackingUrl = getTrackingUrl(campaign.slug);
+  const trackingUrl = getTrackingUrl(stats.slug);
 
   return (
     <div className="space-y-8">
-      <div>
-        <Link href="/admin" className="text-sm text-foreground/60 hover:text-foreground">
-          ← Back to campaigns
-        </Link>
-        <h1 className="mt-3 text-2xl font-semibold">{campaign.name}</h1>
-        <p className="mt-1 text-sm text-foreground/60">Status: {campaign.status}</p>
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <Link href="/admin" className="text-sm text-foreground/60 hover:text-foreground">
+            ← Back to creators
+          </Link>
+          <h1 className="mt-3 text-2xl font-semibold">{stats.name}</h1>
+          <p className="mt-1 text-sm text-foreground/60">
+            Status: {stats.status}
+            {stats.archivedAt ? ` · Archived ${formatDate(stats.archivedAt)}` : ""}
+          </p>
+        </div>
+        <form action={stats.archivedAt ? restoreCampaign : archiveCampaign}>
+          <input type="hidden" name="id" value={stats.id} />
+          <button
+            type="submit"
+            className="rounded-lg border border-nam-border px-4 py-2 text-sm text-foreground/80 transition hover:border-nam-green hover:text-nam-green"
+          >
+            {stats.archivedAt ? "Restore creator" : "Archive creator"}
+          </button>
+        </form>
       </div>
 
       <section className="rounded-xl border border-nam-border bg-nam-card p-5">
         <div className="flex flex-wrap items-center gap-5">
           {stats.profileImageUrl ? (
-            <img
+            <Image
               src={stats.profileImageUrl}
-              alt={`@${stats.xHandle}`}
+              alt={stats.name}
+              width={64}
+              height={64}
+              unoptimized
               className="h-16 w-16 rounded-full border border-nam-border object-cover"
             />
           ) : (
             <div className="flex h-16 w-16 items-center justify-center rounded-full border border-nam-border bg-white/5 text-xl font-semibold">
-              {stats.xHandle.slice(0, 1).toUpperCase()}
+              {stats.name.slice(0, 1).toUpperCase()}
             </div>
           )}
           <div className="min-w-0 flex-1">
-            <p className="text-sm text-foreground/50">X influencer</p>
+            <p className="text-sm text-foreground/50">{formatPlatform(stats.platform)} creator</p>
             <a
-              href={stats.xProfileUrl}
+              href={stats.profileUrl}
               target="_blank"
               rel="noreferrer"
               className="text-lg font-semibold text-nam-green hover:underline"
             >
-              @{stats.xHandle}
+              {stats.profileUrl}
             </a>
+            {stats.contactInfo ? (
+              <p className="mt-2 whitespace-pre-wrap text-sm text-foreground/70">
+                {stats.contactInfo}
+              </p>
+            ) : null}
           </div>
         </div>
 
@@ -73,7 +109,14 @@ export default async function CampaignDetailPage({
 
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {[
-          ["Budget", formatCurrency(stats.budget)],
+          ["Videos", String(stats.videoCount)],
+          ["Total views", stats.totalViews.toLocaleString()],
+          ["Total likes", stats.totalLikes.toLocaleString()],
+          ["Total comments", stats.totalComments.toLocaleString()],
+          ["Fixed fees", formatCurrency(stats.fixedFees)],
+          ["Estimated CPM spend", formatCurrency(stats.estimatedCpmSpend)],
+          ["Uncapped spend", formatCurrency(stats.uncappedSpend)],
+          ["Budget-capped spend", formatCurrency(stats.cappedSpend)],
           ["Referral visits", String(stats.referralVisits)],
           ["Download clicks", String(stats.downloadClicks)],
           ["Download rate", stats.downloadRate != null ? formatPercent(stats.downloadRate) : "—"],
@@ -95,6 +138,120 @@ export default async function CampaignDetailPage({
             <p className="mt-1 text-lg font-semibold">{value}</p>
           </div>
         ))}
+      </section>
+
+      <section className="space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 className="text-xl font-semibold">Video stats</h2>
+            <p className="mt-1 text-sm text-foreground/60">
+              Spreadsheet-style performance for each social video link.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href={`/admin/campaigns/${stats.id}/videos/new`}
+              className="rounded-lg bg-nam-green px-4 py-2 text-sm font-semibold text-black transition hover:opacity-90"
+            >
+              Add video
+            </Link>
+            <form action={refreshCampaignVideosAction}>
+              <input type="hidden" name="campaignId" value={stats.id} />
+              <button
+                type="submit"
+                className="rounded-lg border border-nam-border px-4 py-2 text-sm text-foreground/80 transition hover:border-nam-green hover:text-nam-green"
+              >
+                Refresh all metrics
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div className="overflow-x-auto rounded-xl border border-nam-border">
+          <table className="min-w-full text-left text-sm">
+            <thead className="border-b border-nam-border bg-white/5 text-foreground/70">
+              <tr>
+                <th className="px-4 py-3 font-medium">Video</th>
+                <th className="px-4 py-3 font-medium">Platform</th>
+                <th className="px-4 py-3 font-medium">Planned</th>
+                <th className="px-4 py-3 font-medium">Posted</th>
+                <th className="px-4 py-3 font-medium">Fixed fee</th>
+                <th className="px-4 py-3 font-medium">CPM</th>
+                <th className="px-4 py-3 font-medium">Max budget</th>
+                <th className="px-4 py-3 font-medium">Views</th>
+                <th className="px-4 py-3 font-medium">Likes</th>
+                <th className="px-4 py-3 font-medium">Comments</th>
+                <th className="px-4 py-3 font-medium">Spend</th>
+                <th className="px-4 py-3 font-medium">Slug</th>
+                <th className="px-4 py-3 font-medium">Fetched</th>
+                <th className="px-4 py-3 font-medium">Status</th>
+                <th className="px-4 py-3 font-medium">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {videos.length === 0 ? (
+                <tr>
+                  <td colSpan={15} className="px-4 py-8 text-center text-foreground/50">
+                    No videos yet.{" "}
+                    <Link
+                      href={`/admin/campaigns/${stats.id}/videos/new`}
+                      className="text-nam-green hover:underline"
+                    >
+                      Add a video
+                    </Link>{" "}
+                    to start tracking post-level stats.
+                  </td>
+                </tr>
+              ) : (
+                videos.map((video) => (
+                  <tr key={video.id} className="border-b border-nam-border/60 align-top">
+                    <td className="max-w-72 px-4 py-3">
+                      <p className="font-medium">{video.name}</p>
+                      <a
+                        href={video.videoUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="break-all text-xs text-nam-green hover:underline"
+                      >
+                        {video.videoUrl}
+                      </a>
+                    </td>
+                    <td className="px-4 py-3">{formatPlatform(video.platform)}</td>
+                    <td className="px-4 py-3">{formatDate(video.plannedDate)}</td>
+                    <td className="px-4 py-3">{formatDate(video.postedDate)}</td>
+                    <td className="px-4 py-3">{formatCurrency(video.fixedFee)}</td>
+                    <td className="px-4 py-3">{formatCurrency(video.variableFee)}</td>
+                    <td className="px-4 py-3">
+                      {video.maxBudget == null ? "—" : formatCurrency(video.maxBudget)}
+                    </td>
+                    <td className="px-4 py-3">{video.views.toLocaleString()}</td>
+                    <td className="px-4 py-3">{video.likes.toLocaleString()}</td>
+                    <td className="px-4 py-3">{video.comments.toLocaleString()}</td>
+                    <td className="px-4 py-3">{formatCurrency(video.cappedSpend)}</td>
+                    <td className="px-4 py-3">{video.slug}</td>
+                    <td className="px-4 py-3">{formatDateTime(video.metricsFetchedAt)}</td>
+                    <td className="max-w-64 px-4 py-3">
+                      {video.metricsFetchError ? (
+                        <span className="text-red-300">{video.metricsFetchError}</span>
+                      ) : (
+                        <span className="text-foreground/60">OK</span>
+                      )}
+                    </td>
+                    <td className="px-4 py-3">
+                      <form action={refreshVideoMetricsAction}>
+                        <input type="hidden" name="id" value={video.id} />
+                        <input type="hidden" name="campaignId" value={stats.id} />
+                        <button type="submit" className="text-nam-green hover:underline">
+                          Refresh
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
       </section>
     </div>
   );

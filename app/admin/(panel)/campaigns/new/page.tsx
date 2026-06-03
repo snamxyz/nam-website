@@ -6,9 +6,9 @@ export default function NewCampaignPage() {
     <div className="space-y-6">
       <div>
         <Link href="/admin" className="text-sm text-foreground/60 hover:text-foreground">
-          ← Back to campaigns
+          ← Back to creators
         </Link>
-        <h1 className="mt-3 text-2xl font-semibold">New campaign</h1>
+        <h1 className="mt-3 text-2xl font-semibold">New creator</h1>
       </div>
       <CampaignForm />
     </div>

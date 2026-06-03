@@ -1,9 +1,10 @@
 import "dotenv/config";
-import { Prisma, PrismaClient } from "../generated/prisma/client";
+import { PrismaClient } from "../generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
+import { normalizeDatabaseUrl } from "../lib/database-url";
 
 const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL!,
+  connectionString: normalizeDatabaseUrl(process.env.DATABASE_URL!),
 });
 const prisma = new PrismaClient({ adapter });
 
@@ -21,11 +22,19 @@ async function main() {
     data: {
       name: "Launch Campaign",
       status: "ACTIVE",
-      budget: new Prisma.Decimal(10000),
       slug: "rish",
-      xProfileUrl: "https://x.com/rish",
-      xHandle: "rish",
+      profileUrl: "https://www.youtube.com/@rish",
+      platform: "YOUTUBE",
+      contactInfo: "rish@example.com",
       profileImageUrl: "https://unavatar.io/x/rish",
+      videos: {
+        create: {
+          name: "Launch video",
+          videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          platform: "YOUTUBE",
+          slug: "rish-launch-video",
+        },
+      },
     },
   });
 

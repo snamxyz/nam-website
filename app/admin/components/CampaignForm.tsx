@@ -21,20 +21,43 @@ export default function CampaignForm() {
         <input id="name" name="name" required className={inputClassName} />
       </div>
       <div>
-        <label htmlFor="xProfileUrl" className="mb-1 block text-sm text-foreground/70">
-          X profile URL
+        <label htmlFor="profileUrl" className="mb-1 block text-sm text-foreground/70">
+          Profile link
         </label>
         <input
-          id="xProfileUrl"
-          name="xProfileUrl"
+          id="profileUrl"
+          name="profileUrl"
           type="url"
           required
-          placeholder="https://x.com/username"
+          placeholder="https://youtube.com/@creator"
           className={inputClassName}
         />
         <p className="mt-1 text-xs text-foreground/50">
-          We will fetch the influencer profile picture from this X account.
+          Paste the creator profile link for their primary platform.
         </p>
+      </div>
+      <div>
+        <label htmlFor="platform" className="mb-1 block text-sm text-foreground/70">
+          Platform
+        </label>
+        <select id="platform" name="platform" className={inputClassName} defaultValue="YOUTUBE">
+          <option value="YOUTUBE">YouTube</option>
+          <option value="INSTAGRAM">Instagram</option>
+          <option value="TIKTOK">TikTok</option>
+          <option value="OTHER">Other</option>
+        </select>
+      </div>
+      <div>
+        <label htmlFor="contactInfo" className="mb-1 block text-sm text-foreground/70">
+          Contact info
+        </label>
+        <textarea
+          id="contactInfo"
+          name="contactInfo"
+          rows={3}
+          placeholder="Email, phone, manager, notes..."
+          className={inputClassName}
+        />
       </div>
       <div>
         <label htmlFor="slug" className="mb-1 block text-sm text-foreground/70">
@@ -45,7 +68,7 @@ export default function CampaignForm() {
           name="slug"
           pattern="[a-z0-9][a-z0-9-]{0,62}[a-z0-9]"
           title="Lowercase letters, numbers, and hyphens only"
-          placeholder="auto-generated from X handle"
+          placeholder="auto-generated from creator name"
           className={inputClassName}
         />
         <p className="mt-1 text-xs text-foreground/50">
@@ -62,27 +85,13 @@ export default function CampaignForm() {
           <option value="PAUSED">Paused</option>
         </select>
       </div>
-      <div>
-        <label htmlFor="budget" className="mb-1 block text-sm text-foreground/70">
-          Budget (USD)
-        </label>
-        <input
-          id="budget"
-          name="budget"
-          type="number"
-          min="0"
-          step="0.01"
-          defaultValue="0"
-          className={inputClassName}
-        />
-      </div>
       {state.error ? <p className="text-sm text-red-400">{state.error}</p> : null}
       <button
         type="submit"
         disabled={pending}
         className="rounded-lg bg-nam-green px-4 py-2 text-sm font-semibold text-black transition hover:opacity-90 disabled:opacity-50"
       >
-        {pending ? "Creating..." : "Create campaign"}
+        {pending ? "Creating..." : "Create creator"}
       </button>
     </form>
   );

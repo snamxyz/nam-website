@@ -1,8 +1,9 @@
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@/generated/prisma/client";
+import { normalizeDatabaseUrl } from "@/lib/database-url";
 
 // Bump when schema changes so dev hot-reload picks up a fresh client after prisma generate.
-const PRISMA_SCHEMA_VERSION = "20260602120000_campaign_x_referral";
+const PRISMA_SCHEMA_VERSION = "20260603221700_creator_video_tracking";
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
@@ -15,7 +16,9 @@ function createPrismaClient() {
     throw new Error("DATABASE_URL is not set");
   }
 
-  const adapter = new PrismaPg({ connectionString });
+  const adapter = new PrismaPg({
+    connectionString: normalizeDatabaseUrl(connectionString),
+  });
   return new PrismaClient({ adapter });
 }
 
