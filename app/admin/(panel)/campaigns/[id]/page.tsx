@@ -221,6 +221,25 @@ export default async function CampaignDetailPage({
                 ))
               )}
             </tbody>
+            {videos.length > 0 ? (
+              <tfoot className="border-t border-nam-border bg-white/5 font-semibold">
+                <tr>
+                  <td className="sticky left-0 z-10 bg-white/5 px-4 py-3">Total</td>
+                  <td className="px-4 py-3 text-right tabular-nums">
+                    {stats.totalViews.toLocaleString()}
+                  </td>
+                  <td className="px-4 py-3 text-right tabular-nums">
+                    {stats.totalLikes.toLocaleString()}
+                  </td>
+                  <td className="px-4 py-3 text-right tabular-nums">
+                    {stats.totalComments.toLocaleString()}
+                  </td>
+                  <td className="px-4 py-3" colSpan={5} />
+                  <td className="px-4 py-3">{formatCurrency(stats.cappedSpend)}</td>
+                  <td className="px-4 py-3" colSpan={2} />
+                </tr>
+              </tfoot>
+            ) : null}
           </table>
         </div>
       </section>

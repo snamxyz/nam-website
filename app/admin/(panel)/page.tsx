@@ -115,6 +115,7 @@ export default async function AdminDashboardPage() {
               <tr>
                 <th className="px-4 py-3 font-medium">Creator</th>
                 <th className="px-4 py-3 font-medium">Videos</th>
+                <th className="px-4 py-3 font-medium">Views</th>
                 <th className="px-4 py-3 font-medium">Archived</th>
                 <th className="px-4 py-3 font-medium">Actions</th>
               </tr>
@@ -122,7 +123,7 @@ export default async function AdminDashboardPage() {
             <tbody>
               {archivedCampaigns.length === 0 ? (
                 <tr>
-                  <td colSpan={4} className="px-4 py-6 text-center text-foreground/50">
+                  <td colSpan={5} className="px-4 py-6 text-center text-foreground/50">
                     No archived creators.
                   </td>
                 </tr>
@@ -138,6 +139,7 @@ export default async function AdminDashboardPage() {
                       </Link>
                     </td>
                     <td className="px-4 py-3">{campaign.videoCount}</td>
+                    <td className="px-4 py-3">{campaign.totalViews.toLocaleString()}</td>
                     <td className="px-4 py-3">
                       {campaign.archivedAt?.toLocaleDateString() ?? "—"}
                     </td>
