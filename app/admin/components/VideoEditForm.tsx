@@ -2,24 +2,47 @@
 
 import { useActionState } from "react";
 import type { ActionState } from "../actions";
-import { createVideo } from "../actions";
+import { updateVideo } from "../actions";
 
 const initialState: ActionState = {};
 
 const inputClassName =
   "w-full rounded-lg border border-nam-border bg-black/40 px-3 py-2 text-sm outline-none focus:border-nam-green";
 
-export default function VideoForm({ campaignId }: { campaignId: string }) {
-  const [state, formAction, pending] = useActionState(createVideo, initialState);
+export type VideoEditDefaults = {
+  videoId: string;
+  campaignId: string;
+  name: string;
+  videoUrl: string;
+  slug: string;
+  plannedDate: string;
+  postedDate: string;
+  fixedFee: string;
+  variableFee: string;
+  maxBudget: string;
+  views: number;
+  likes: number;
+  comments: number;
+};
+
+export default function VideoEditForm({ defaults }: { defaults: VideoEditDefaults }) {
+  const [state, formAction, pending] = useActionState(updateVideo, initialState);
 
   return (
     <form action={formAction} className="grid gap-4 rounded-xl border border-nam-border bg-nam-card p-5 lg:grid-cols-2">
-      <input type="hidden" name="campaignId" value={campaignId} />
+      <input type="hidden" name="videoId" value={defaults.videoId} />
+      <input type="hidden" name="campaignId" value={defaults.campaignId} />
       <div>
         <label htmlFor="name" className="mb-1 block text-sm text-foreground/70">
           Video name
         </label>
-        <input id="name" name="name" required className={inputClassName} />
+        <input
+          id="name"
+          name="name"
+          required
+          defaultValue={defaults.name}
+          className={inputClassName}
+        />
       </div>
       <div>
         <label htmlFor="videoUrl" className="mb-1 block text-sm text-foreground/70">
@@ -30,7 +53,7 @@ export default function VideoForm({ campaignId }: { campaignId: string }) {
           name="videoUrl"
           type="url"
           required
-          placeholder="https://..."
+          defaultValue={defaults.videoUrl}
           className={inputClassName}
         />
       </div>
@@ -43,7 +66,7 @@ export default function VideoForm({ campaignId }: { campaignId: string }) {
           name="slug"
           pattern="[a-z0-9][a-z0-9-]{0,62}[a-z0-9]"
           title="Lowercase letters, numbers, and hyphens only"
-          placeholder="auto-generated from video name"
+          defaultValue={defaults.slug}
           className={inputClassName}
         />
       </div>
@@ -51,13 +74,25 @@ export default function VideoForm({ campaignId }: { campaignId: string }) {
         <label htmlFor="plannedDate" className="mb-1 block text-sm text-foreground/70">
           Planned date
         </label>
-        <input id="plannedDate" name="plannedDate" type="date" className={inputClassName} />
+        <input
+          id="plannedDate"
+          name="plannedDate"
+          type="date"
+          defaultValue={defaults.plannedDate}
+          className={inputClassName}
+        />
       </div>
       <div>
         <label htmlFor="postedDate" className="mb-1 block text-sm text-foreground/70">
           Posted date
         </label>
-        <input id="postedDate" name="postedDate" type="date" className={inputClassName} />
+        <input
+          id="postedDate"
+          name="postedDate"
+          type="date"
+          defaultValue={defaults.postedDate}
+          className={inputClassName}
+        />
       </div>
       <div>
         <label htmlFor="fixedFee" className="mb-1 block text-sm text-foreground/70">
@@ -69,7 +104,7 @@ export default function VideoForm({ campaignId }: { campaignId: string }) {
           type="number"
           min="0"
           step="0.01"
-          defaultValue="0"
+          defaultValue={defaults.fixedFee}
           className={inputClassName}
         />
       </div>
@@ -83,7 +118,7 @@ export default function VideoForm({ campaignId }: { campaignId: string }) {
           type="number"
           min="0"
           step="0.01"
-          defaultValue="0"
+          defaultValue={defaults.variableFee}
           className={inputClassName}
         />
       </div>
@@ -98,6 +133,7 @@ export default function VideoForm({ campaignId }: { campaignId: string }) {
           min="0"
           step="0.01"
           placeholder="No cap"
+          defaultValue={defaults.maxBudget}
           className={inputClassName}
         />
       </div>
@@ -111,7 +147,7 @@ export default function VideoForm({ campaignId }: { campaignId: string }) {
           type="number"
           min="0"
           step="1"
-          defaultValue="0"
+          defaultValue={defaults.views}
           className={inputClassName}
         />
       </div>
@@ -125,7 +161,7 @@ export default function VideoForm({ campaignId }: { campaignId: string }) {
           type="number"
           min="0"
           step="1"
-          defaultValue="0"
+          defaultValue={defaults.likes}
           className={inputClassName}
         />
       </div>
@@ -139,17 +175,17 @@ export default function VideoForm({ campaignId }: { campaignId: string }) {
           type="number"
           min="0"
           step="1"
-          defaultValue="0"
+          defaultValue={defaults.comments}
           className={inputClassName}
         />
       </div>
-      <div className="flex items-end">
+      <div className="flex items-end gap-3">
         <button
           type="submit"
           disabled={pending}
           className="rounded-lg bg-nam-green px-4 py-2 text-sm font-semibold text-black transition hover:opacity-90 disabled:opacity-50"
         >
-          {pending ? "Adding..." : "Add video"}
+          {pending ? "Saving..." : "Save video"}
         </button>
       </div>
       {state.error ? <p className="lg:col-span-2 text-sm text-red-400">{state.error}</p> : null}

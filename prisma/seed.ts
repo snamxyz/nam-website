@@ -24,14 +24,12 @@ async function main() {
       status: "ACTIVE",
       slug: "rish",
       profileUrl: "https://www.youtube.com/@rish",
-      platform: "YOUTUBE",
       contactInfo: "rish@example.com",
       profileImageUrl: "https://unavatar.io/x/rish",
       videos: {
         create: {
           name: "Launch video",
           videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-          platform: "YOUTUBE",
           slug: "rish-launch-video",
         },
       },

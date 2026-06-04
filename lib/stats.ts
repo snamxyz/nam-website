@@ -1,4 +1,4 @@
-import { ClickEventType, ConversionType, Platform, Prisma } from "@/generated/prisma/client";
+import { ClickEventType, ConversionType, Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/db";
 
 export function formatCurrency(value: number): string {
@@ -47,7 +47,6 @@ export type CampaignStats = {
   name: string;
   status: string;
   slug: string;
-  platform: Platform;
   profileUrl: string;
   contactInfo: string | null;
   profileImageUrl: string | null;
@@ -75,7 +74,6 @@ export type VideoStats = {
   id: string;
   name: string;
   videoUrl: string;
-  platform: Platform;
   plannedDate: Date | null;
   postedDate: Date | null;
   fixedFee: number;
@@ -85,8 +83,6 @@ export type VideoStats = {
   views: number;
   likes: number;
   comments: number;
-  metricsFetchedAt: Date | null;
-  metricsFetchError: string | null;
   estimatedCpmSpend: number;
   uncappedSpend: number;
   cappedSpend: number;
@@ -116,7 +112,6 @@ function toVideoStats(video: {
   id: string;
   name: string;
   videoUrl: string;
-  platform: Platform;
   plannedDate: Date | null;
   postedDate: Date | null;
   fixedFee: Prisma.Decimal;
@@ -126,8 +121,6 @@ function toVideoStats(video: {
   views: number;
   likes: number;
   comments: number;
-  metricsFetchedAt: Date | null;
-  metricsFetchError: string | null;
 }): VideoStats {
   const spend = getVideoSpend(video);
 
@@ -135,7 +128,6 @@ function toVideoStats(video: {
     id: video.id,
     name: video.name,
     videoUrl: video.videoUrl,
-    platform: video.platform,
     plannedDate: video.plannedDate,
     postedDate: video.postedDate,
     fixedFee: spend.fixedFee,
@@ -145,8 +137,6 @@ function toVideoStats(video: {
     views: video.views,
     likes: video.likes,
     comments: video.comments,
-    metricsFetchedAt: video.metricsFetchedAt,
-    metricsFetchError: video.metricsFetchError,
     estimatedCpmSpend: spend.estimatedCpmSpend,
     uncappedSpend: spend.uncappedSpend,
     cappedSpend: spend.cappedSpend,
@@ -193,7 +183,6 @@ export async function getCampaignStats(campaignId: string): Promise<CampaignStat
     name: campaign.name,
     status: campaign.status,
     slug: campaign.slug,
-    platform: campaign.platform,
     profileUrl: campaign.profileUrl,
     contactInfo: campaign.contactInfo,
     profileImageUrl: campaign.profileImageUrl,

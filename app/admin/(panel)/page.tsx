@@ -6,7 +6,6 @@ import {
   getAllCampaignStats,
 } from "@/lib/stats";
 import { getTrackingUrl } from "@/lib/constants";
-import { formatPlatform } from "@/lib/profile";
 
 export default async function AdminDashboardPage() {
   const campaigns = await getAllCampaignStats();
@@ -35,7 +34,6 @@ export default async function AdminDashboardPage() {
           <thead className="border-b border-nam-border bg-white/5 text-foreground/70">
             <tr>
               <th className="px-4 py-3 font-medium">Creator</th>
-              <th className="px-4 py-3 font-medium">Platform</th>
               <th className="px-4 py-3 font-medium">Referral link</th>
               <th className="px-4 py-3 font-medium">Status</th>
               <th className="px-4 py-3 font-medium">Videos</th>
@@ -53,7 +51,7 @@ export default async function AdminDashboardPage() {
           <tbody>
             {activeCampaigns.length === 0 ? (
               <tr>
-                <td colSpan={14} className="px-4 py-8 text-center text-foreground/50">
+                <td colSpan={13} className="px-4 py-8 text-center text-foreground/50">
                   No active creators yet. Create your first creator to get started.
                 </td>
               </tr>
@@ -68,7 +66,6 @@ export default async function AdminDashboardPage() {
                       {campaign.name}
                     </Link>
                   </td>
-                  <td className="px-4 py-3">{formatPlatform(campaign.platform)}</td>
                   <td className="px-4 py-3">
                     <a
                       href={getTrackingUrl(campaign.slug)}
@@ -117,7 +114,6 @@ export default async function AdminDashboardPage() {
             <thead className="border-b border-nam-border bg-white/5 text-foreground/70">
               <tr>
                 <th className="px-4 py-3 font-medium">Creator</th>
-                <th className="px-4 py-3 font-medium">Platform</th>
                 <th className="px-4 py-3 font-medium">Videos</th>
                 <th className="px-4 py-3 font-medium">Archived</th>
                 <th className="px-4 py-3 font-medium">Actions</th>
@@ -126,7 +122,7 @@ export default async function AdminDashboardPage() {
             <tbody>
               {archivedCampaigns.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-4 py-6 text-center text-foreground/50">
+                  <td colSpan={4} className="px-4 py-6 text-center text-foreground/50">
                     No archived creators.
                   </td>
                 </tr>
@@ -141,7 +137,6 @@ export default async function AdminDashboardPage() {
                         {campaign.name}
                       </Link>
                     </td>
-                    <td className="px-4 py-3">{formatPlatform(campaign.platform)}</td>
                     <td className="px-4 py-3">{campaign.videoCount}</td>
                     <td className="px-4 py-3">
                       {campaign.archivedAt?.toLocaleDateString() ?? "—"}

@@ -29,23 +29,12 @@ export default function CampaignForm() {
           name="profileUrl"
           type="url"
           required
-          placeholder="https://youtube.com/@creator"
+          placeholder="https://..."
           className={inputClassName}
         />
         <p className="mt-1 text-xs text-foreground/50">
-          Paste the creator profile link for their primary platform.
+          Paste the creator&apos;s public profile or channel link.
         </p>
-      </div>
-      <div>
-        <label htmlFor="platform" className="mb-1 block text-sm text-foreground/70">
-          Platform
-        </label>
-        <select id="platform" name="platform" className={inputClassName} defaultValue="YOUTUBE">
-          <option value="YOUTUBE">YouTube</option>
-          <option value="INSTAGRAM">Instagram</option>
-          <option value="TIKTOK">TikTok</option>
-          <option value="OTHER">Other</option>
-        </select>
       </div>
       <div>
         <label htmlFor="contactInfo" className="mb-1 block text-sm text-foreground/70">

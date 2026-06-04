@@ -13,13 +13,6 @@ enum CampaignStatus {
   PAUSED
 }
 
-enum Platform {
-  YOUTUBE
-  INSTAGRAM
-  TIKTOK
-  OTHER
-}
-
 enum ConversionType {
   SIGNUP
   FIRST_RECEIPT_VERIFIED
@@ -39,7 +32,6 @@ model Campaign {
   budget          Decimal        @default(0) @db.Decimal(12, 2)
   slug            String         @unique
   profileUrl      String
-  platform        Platform       @default(OTHER)
   contactInfo     String?
   profileImageUrl String?
   archivedAt      DateTime?
@@ -51,33 +43,28 @@ model Campaign {
   conversionEvents ConversionEvent[]
 
   @@index([archivedAt])
-  @@index([platform])
 }
 
 model Video {
-  id                String    @id @default(cuid())
-  campaignId        String
-  name              String
-  videoUrl          String
-  platform          Platform
-  plannedDate       DateTime?
-  postedDate        DateTime?
-  fixedFee          Decimal   @default(0) @db.Decimal(12, 2)
-  variableFee       Decimal   @default(0) @db.Decimal(12, 2)
-  maxBudget         Decimal?  @db.Decimal(12, 2)
-  slug              String    @unique
-  views             Int       @default(0)
-  likes             Int       @default(0)
-  comments          Int       @default(0)
-  metricsFetchedAt  DateTime?
-  metricsFetchError String?
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
+  id          String    @id @default(cuid())
+  campaignId  String
+  name        String
+  videoUrl    String
+  plannedDate DateTime?
+  postedDate  DateTime?
+  fixedFee    Decimal   @default(0) @db.Decimal(12, 2)
+  variableFee Decimal   @default(0) @db.Decimal(12, 2)
+  maxBudget   Decimal?  @db.Decimal(12, 2)
+  slug        String    @unique
+  views       Int       @default(0)
+  likes       Int       @default(0)
+  comments    Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
 
   @@index([campaignId])
-  @@index([platform])
   @@index([postedDate])
 }
 

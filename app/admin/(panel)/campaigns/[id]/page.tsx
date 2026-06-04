@@ -1,15 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import {
-  archiveCampaign,
-  refreshCampaignVideosAction,
-  refreshVideoMetricsAction,
-  restoreCampaign,
-} from "@/app/admin/actions";
+import { archiveCampaign, restoreCampaign } from "@/app/admin/actions";
 import CopyLinkButton from "@/app/admin/components/CopyLinkButton";
 import { getTrackingUrl } from "@/lib/constants";
-import { formatPlatform } from "@/lib/profile";
 import {
   formatCurrency,
   formatPercent,
@@ -20,10 +14,6 @@ import {
 
 function formatDate(date: Date | null): string {
   return date ? date.toLocaleDateString() : "—";
-}
-
-function formatDateTime(date: Date | null): string {
-  return date ? date.toLocaleString() : "Never";
 }
 
 export default async function CampaignDetailPage({
@@ -79,7 +69,6 @@ export default async function CampaignDetailPage({
             </div>
           )}
           <div className="min-w-0 flex-1">
-            <p className="text-sm text-foreground/50">{formatPlatform(stats.platform)} creator</p>
             <a
               href={stats.profileUrl}
               target="_blank"
@@ -148,50 +137,36 @@ export default async function CampaignDetailPage({
               Spreadsheet-style performance for each social video link.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-3">
-            <Link
-              href={`/admin/campaigns/${stats.id}/videos/new`}
-              className="rounded-lg bg-nam-green px-4 py-2 text-sm font-semibold text-black transition hover:opacity-90"
-            >
-              Add video
-            </Link>
-            <form action={refreshCampaignVideosAction}>
-              <input type="hidden" name="campaignId" value={stats.id} />
-              <button
-                type="submit"
-                className="rounded-lg border border-nam-border px-4 py-2 text-sm text-foreground/80 transition hover:border-nam-green hover:text-nam-green"
-              >
-                Refresh all metrics
-              </button>
-            </form>
-          </div>
+          <Link
+            href={`/admin/campaigns/${stats.id}/videos/new`}
+            className="rounded-lg bg-nam-green px-4 py-2 text-sm font-semibold text-black transition hover:opacity-90"
+          >
+            Add video
+          </Link>
         </div>
 
         <div className="overflow-x-auto rounded-xl border border-nam-border">
           <table className="min-w-full text-left text-sm">
             <thead className="border-b border-nam-border bg-white/5 text-foreground/70">
               <tr>
-                <th className="px-4 py-3 font-medium">Video</th>
-                <th className="px-4 py-3 font-medium">Platform</th>
+                <th className="sticky left-0 z-10 bg-white/5 px-4 py-3 font-medium">Video</th>
+                <th className="px-4 py-3 font-medium text-right">Views</th>
+                <th className="px-4 py-3 font-medium text-right">Likes</th>
+                <th className="px-4 py-3 font-medium text-right">Comments</th>
                 <th className="px-4 py-3 font-medium">Planned</th>
                 <th className="px-4 py-3 font-medium">Posted</th>
                 <th className="px-4 py-3 font-medium">Fixed fee</th>
                 <th className="px-4 py-3 font-medium">CPM</th>
                 <th className="px-4 py-3 font-medium">Max budget</th>
-                <th className="px-4 py-3 font-medium">Views</th>
-                <th className="px-4 py-3 font-medium">Likes</th>
-                <th className="px-4 py-3 font-medium">Comments</th>
                 <th className="px-4 py-3 font-medium">Spend</th>
                 <th className="px-4 py-3 font-medium">Slug</th>
-                <th className="px-4 py-3 font-medium">Fetched</th>
-                <th className="px-4 py-3 font-medium">Status</th>
                 <th className="px-4 py-3 font-medium">Actions</th>
               </tr>
             </thead>
             <tbody>
               {videos.length === 0 ? (
                 <tr>
-                  <td colSpan={15} className="px-4 py-8 text-center text-foreground/50">
+                  <td colSpan={12} className="px-4 py-8 text-center text-foreground/50">
                     No videos yet.{" "}
                     <Link
                       href={`/admin/campaigns/${stats.id}/videos/new`}
@@ -205,18 +180,26 @@ export default async function CampaignDetailPage({
               ) : (
                 videos.map((video) => (
                   <tr key={video.id} className="border-b border-nam-border/60 align-top">
-                    <td className="max-w-72 px-4 py-3">
+                    <td className="sticky left-0 z-10 max-w-72 bg-nam-card px-4 py-3">
                       <p className="font-medium">{video.name}</p>
                       <a
                         href={video.videoUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="break-all text-xs text-nam-green hover:underline"
+                        className="mt-1 block break-all text-xs text-nam-green hover:underline"
                       >
                         {video.videoUrl}
                       </a>
                     </td>
-                    <td className="px-4 py-3">{formatPlatform(video.platform)}</td>
+                    <td className="px-4 py-3 text-right font-semibold tabular-nums">
+                      {video.views.toLocaleString()}
+                    </td>
+                    <td className="px-4 py-3 text-right tabular-nums">
+                      {video.likes.toLocaleString()}
+                    </td>
+                    <td className="px-4 py-3 text-right tabular-nums">
+                      {video.comments.toLocaleString()}
+                    </td>
                     <td className="px-4 py-3">{formatDate(video.plannedDate)}</td>
                     <td className="px-4 py-3">{formatDate(video.postedDate)}</td>
                     <td className="px-4 py-3">{formatCurrency(video.fixedFee)}</td>
@@ -224,27 +207,15 @@ export default async function CampaignDetailPage({
                     <td className="px-4 py-3">
                       {video.maxBudget == null ? "—" : formatCurrency(video.maxBudget)}
                     </td>
-                    <td className="px-4 py-3">{video.views.toLocaleString()}</td>
-                    <td className="px-4 py-3">{video.likes.toLocaleString()}</td>
-                    <td className="px-4 py-3">{video.comments.toLocaleString()}</td>
                     <td className="px-4 py-3">{formatCurrency(video.cappedSpend)}</td>
                     <td className="px-4 py-3">{video.slug}</td>
-                    <td className="px-4 py-3">{formatDateTime(video.metricsFetchedAt)}</td>
-                    <td className="max-w-64 px-4 py-3">
-                      {video.metricsFetchError ? (
-                        <span className="text-red-300">{video.metricsFetchError}</span>
-                      ) : (
-                        <span className="text-foreground/60">OK</span>
-                      )}
-                    </td>
                     <td className="px-4 py-3">
-                      <form action={refreshVideoMetricsAction}>
-                        <input type="hidden" name="id" value={video.id} />
-                        <input type="hidden" name="campaignId" value={stats.id} />
-                        <button type="submit" className="text-nam-green hover:underline">
-                          Refresh
-                        </button>
-                      </form>
+                      <Link
+                        href={`/admin/campaigns/${stats.id}/videos/${video.id}/edit`}
+                        className="text-nam-green hover:underline"
+                      >
+                        Edit
+                      </Link>
                     </td>
                   </tr>
                 ))

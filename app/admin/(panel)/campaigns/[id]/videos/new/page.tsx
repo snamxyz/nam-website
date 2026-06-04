@@ -26,8 +26,7 @@ export default async function NewVideoPage({
         </Link>
         <h1 className="mt-3 text-2xl font-semibold">Add video</h1>
         <p className="mt-1 text-sm text-foreground/60">
-          Store each YouTube, Instagram, or TikTok post URL separately so its metrics
-          do not overlap with another video.
+          Add a social video link and optionally enter its performance metrics.
         </p>
       </div>
       <VideoForm campaignId={campaign.id} />
