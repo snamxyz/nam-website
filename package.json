@@ -3,16 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "prisma generate && next build",
-    "start": "next start",
-    "lint": "eslint",
-    "postinstall": "prisma generate",
-    "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate dev",
-    "db:push": "prisma db push",
-    "db:seed": "tsx prisma/seed.ts",
-    "test": "tsx --test lib/**/*.test.ts"
+    "dev": "npm run dev --workspace @nam/web",
+    "dev:web": "npm run dev --workspace @nam/web",
+    "dev:admin": "npm run dev --workspace @nam/admin",
+    "build": "npm run build --workspaces --if-present",
+    "build:web": "npm run build --workspace @nam/web",
+    "build:admin": "npm run build --workspace @nam/admin",
+    "start:web": "npm run start --workspace @nam/web",
+    "start:admin": "npm run start --workspace @nam/admin",
+    "lint": "eslint apps packages",
+    "postinstall": "npm run db:generate",
+    "db:generate": "npm run generate --workspace @nam/db",
+    "db:migrate": "npm run migrate --workspace @nam/db",
+    "db:push": "npm run push --workspace @nam/db",
+    "db:seed": "npm run seed --workspace @nam/db",
+    "test": "tsx --test packages/core/src/**/*.test.ts"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -42,5 +47,9 @@
     "tailwindcss": "^4",
     "tsx": "^4.22.4",
     "typescript": "^5"
-  }
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
 }

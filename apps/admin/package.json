@@ -1,0 +1,19 @@
+{
+  "name": "@nam/admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "npm run generate --workspace @nam/db && next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@nam/core": "file:../../packages/core",
+    "@nam/db": "file:../../packages/db",
+    "lucide-react": "^1.7.0",
+    "next": "16.2.2",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "zod": "^4.4.3"
+  }
+}

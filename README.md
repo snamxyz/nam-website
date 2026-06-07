@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NAM Website
+
+This repo is an npm-workspaces monorepo with two independently deployable
+Next.js apps:
+
+- `apps/web`: public marketing site, referral tracking routes, and conversion APIs.
+- `apps/admin`: password-protected admin dashboard served from the admin domain root.
+- `packages/core`: shared database, tracking, stats, auth, and utility code.
+- `packages/db`: Prisma schema, migrations, seed script, and generated client output.
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies from the repo root:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Run the public app:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run dev:web
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Run the admin app:
 
-## Learn More
+```bash
+npm run dev:admin
+```
 
-To learn more about Next.js, take a look at the following resources:
+Build each app independently:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run build:web
+npm run build:admin
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Database
 
-## Deploy on Vercel
+Prisma lives in `packages/db`. The root scripts delegate to that workspace:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run db:generate
+npm run db:migrate
+npm run db:push
+npm run db:seed
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Run migrations from one controlled place only, such as a CI job or a manual
+release step. Do not configure both Vercel projects to run migrations
+automatically.
+
+## Vercel Projects
+
+Create two Vercel projects from this same repository:
+
+| Project | Root directory | Build command |
+| --- | --- | --- |
+| Public web | `apps/web` | `npm run build` |
+| Admin | `apps/admin` | `npm run build` |
+
+Both app build scripts generate the shared Prisma client before running
+`next build`.
+
+## Environment Variables
+
+Set these on the public web project:
+
+- `DATABASE_URL`
+- `NEXT_PUBLIC_SITE_URL`
+- `WEBHOOK_SECRET`
+- `IP_HASH_SALT`
+
+Set these on the admin project:
+
+- `DATABASE_URL`
+- `SESSION_SECRET`
+- `ADMIN_PASSWORD`
+- `NEXT_PUBLIC_SITE_URL`
+
+For the admin project, `NEXT_PUBLIC_SITE_URL` must point to the public site
+domain so generated referral links use the public `/ref/[slug]` route.

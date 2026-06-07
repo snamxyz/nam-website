@@ -15,7 +15,9 @@
 
 # next.js
 /.next/
+/apps/*/.next/
 /out/
+/apps/*/out/
 
 # production
 /build
@@ -42,3 +44,4 @@ next-env.d.ts
 
 # prisma generated client
 /generated
+/packages/db/generated
