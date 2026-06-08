@@ -26,7 +26,7 @@ const problems = [
     icon: TrendingDown,
     title: "You own nothing",
     description:
-"You don&apos;t actually own any of the points nor decide how much they&apos;re worth. They expire over time and they can be de-valued by the company — you have no say.",  },
+"You don't actually own any of the points nor decide how much they're worth. They expire over time and they can be de-valued by the company — you have no say.",  },
 ];
 
 export default function Problem() {
