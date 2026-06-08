@@ -29,16 +29,16 @@ const termsSections = [
     number: "04",
     heading: "User Content & Receipt Uploads",
     content:
-      'You may upload receipts or other content ("User Content") to earn NAM Coins. You represent that User Content is accurate, lawful, and does not infringe third-party rights. By uploading, you grant us a perpetual, irrevocable, worldwide, royalty-free license to use, modify, store, and analyze User Content for any purpose, including improving our Services and deriving insights.',
+      'You may upload receipts or other content ("User Content") to earn NAM. You represent that User Content is accurate, lawful, and does not infringe third-party rights. By uploading, you grant us a perpetual, irrevocable, worldwide, royalty-free license to use, modify, store, and analyze User Content for any purpose, including improving our Services and deriving insights.',
   },
   {
     id: "nam-coins",
     number: "05",
-    heading: "NAM Coins",
+    heading: "NAM",
     paragraphs: [
-      "NAM Coins are digital collectibles existing on a blockchain and earned solely through uploading qualifying receipts for purchases you already make. No purchase of NAM Coins is required or permitted through our Services. NAM Coins do not represent equity, ownership, or any interest in the Company or its assets. They are highly speculative, carry significant risk of total loss in value, and are not intended as investments.",
-      "NAM Coins are inflationary, with new tokens created daily based on user activity and platform needs, which may dilute value over time. We make no representations about the future value, utility, or liquidity of NAM Coins.",
-      "NAM Coins are delivered directly to your non-custodial wallet. We do not control or have access to your wallet or private keys. If you lose access to your wallet, we cannot recover your NAM Coins or provide any assistance. You assume all risks associated with blockchain technology, including hacks, forks, or network failures.",
+      "NAM are digital collectibles existing on a blockchain and earned solely through uploading qualifying receipts for purchases you already make. No purchase of NAM is required or permitted through our Services. NAM do not represent equity, ownership, or any interest in the Company or its assets. They are highly speculative, carry significant risk of total loss in value, and are not intended as investments.",
+      "NAM are inflationary, with new tokens created daily based on user activity and platform needs, which may dilute value over time. We make no representations about the future value, utility, or liquidity of NAM.",
+      "NAM are delivered directly to your non-custodial wallet. We do not control or have access to your wallet or private keys. If you lose access to your wallet, we cannot recover your NAM or provide any assistance. You assume all risks associated with blockchain technology, including hacks, forks, or network failures.",
     ],
   },
   {
@@ -74,7 +74,7 @@ const termsSections = [
     number: "10",
     heading: "Disclaimers",
     content:
-      'THE SERVICES AND NAM COINS ARE PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT. WE DISCLAIM ANY RESPONSIBILITY FOR THE ACCURACY OF USER CONTENT, BLOCKCHAIN OPERATIONS, OR THIRD-PARTY SERVICES. NAM COINS ARE NOT SECURITIES AND ARE NOT REGISTERED UNDER U.S. SECURITIES LAWS.',
+      'THE SERVICES AND NAM ARE PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT. WE DISCLAIM ANY RESPONSIBILITY FOR THE ACCURACY OF USER CONTENT, BLOCKCHAIN OPERATIONS, OR THIRD-PARTY SERVICES. NAM ARE NOT SECURITIES AND ARE NOT REGISTERED UNDER U.S. SECURITIES LAWS.',
     isLegal: true,
   },
   {
@@ -82,7 +82,7 @@ const termsSections = [
     number: "11",
     heading: "Limitation of Liability",
     content:
-      "TO THE MAXIMUM EXTENT PERMITTED BY LAW, WE SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOSS OF PROFITS, DATA, OR VALUE OF NAM COINS, EVEN IF ADVISED OF THE POSSIBILITY. OUR TOTAL LIABILITY SHALL NOT EXCEED $100.",
+      "TO THE MAXIMUM EXTENT PERMITTED BY LAW, WE SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOSS OF PROFITS, DATA, OR VALUE OF NAM, EVEN IF ADVISED OF THE POSSIBILITY. OUR TOTAL LIABILITY SHALL NOT EXCEED $100.",
     isLegal: true,
   },
   {
@@ -139,7 +139,7 @@ const privacySections = [
     number: "03",
     heading: "How We Use Information",
     content:
-      "We use information to: provide Services; award NAM Coins; analyze trends; improve the App; comply with laws; and for marketing (with opt-out options). We own all data and may use it for any business purpose, including aggregation and sale of anonymized insights.",
+      "We use information to: provide Services; award NAM; analyze trends; improve the App; comply with laws; and for marketing (with opt-out options). We own all data and may use it for any business purpose, including aggregation and sale of anonymized insights.",
   },
   {
     id: "sharing",

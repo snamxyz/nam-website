@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: "NAM Rewards — Mine Crypto From Your Receipts",
   description:
-    "Upload receipts, earn NAM Coins on-chain, and get a powerful crypto wallet.",
+    "Upload receipts, earn NAM on-chain, and get a powerful crypto wallet.",
   keywords: [
     "NAM Rewards",
     "crypto rewards",
@@ -33,14 +33,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "NAM Rewards — Mine Crypto From Your Receipts",
     description:
-      "Upload receipts, earn NAM Coins on-chain, and get a powerful crypto wallet.",
+      "Upload receipts, earn NAM on-chain, and get a powerful crypto wallet.",
     images: [{ url: "/assets/icon_with_text.png" }],
   },
   twitter: {
     card: "summary",
     title: "NAM Rewards — Mine Crypto From Your Receipts",
     description:
-      "Upload receipts, earn NAM Coins on-chain, and get a powerful crypto wallet.",
+      "Upload receipts, earn NAM on-chain, and get a powerful crypto wallet.",
     images: ["/assets/icon_with_text.png"],
   },
 };

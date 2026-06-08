@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 const benefits = [
   {
     icon: Zap,
-    title: "Paid the very next day",
+    title: "Paid daily",
     description:
       "Upload a receipt today and NAM Coin lands in your wallet tomorrow. No statements, no waiting weeks for a payout.",
   },
@@ -82,12 +82,12 @@ export default function Benefits() {
           <div className="benefit-head max-w-xl">
             <span className="eyebrow mb-4">Rewards that belong to you</span>
             <h2 className="text-3xl sm:text-4xl md:text-[2.75rem] font-bold tracking-tight leading-[1.1] text-balance">
-              Real crypto you{" "}
+              Real rewards you{" "}
               <span className="text-gradient-green">actually own.</span>
             </h2>
             <p className="mt-4 text-foreground/50 text-base md:text-lg leading-relaxed">
-              NAM Coin isn&apos;t a point balance with an expiry date. It&apos;s
-              an asset in your wallet — and the rules can&apos;t be changed on you.
+              NAM isn&apos;t a point balance with an expiry date. It&apos;s
+              an asset in your wallet — and the value is determined by the market of everyday people.
             </p>
           </div>
 

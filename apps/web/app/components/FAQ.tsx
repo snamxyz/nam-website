@@ -12,7 +12,7 @@ const faqs = [
   {
     question: "What is NAM Rewards?",
     answer:
-      "NAM Rewards is an app that lets you earn cryptocurrency (NAM Coins) just by uploading photos of your everyday receipts. You spend money like normal — on groceries, coffee, gas, online shopping — then snap your receipt and earn crypto.",
+      "NAM Rewards is an app that lets you earn cryptocurrency (NAM) just by uploading photos of your everyday receipts. You spend money like normal — on groceries, coffee, gas, online shopping — then snap your receipt and earn crypto.",
   },
   {
     question: "What is NAM Coin?",
@@ -22,17 +22,17 @@ const faqs = [
   {
     question: "How does mining work?",
     answer:
-      "Each day, NAM Coins are distributed to users based on their share of total receipt uploads. For example, if you uploaded $10 in receipts and the total network uploaded $1,000 that day, you'd receive 1% of the daily token distribution. The more you spend and upload, the more you earn.",
+      "Each day, NAM are distributed to users based on their share of total receipt uploads. For example, if you uploaded $10 in receipts and the total network uploaded $1,000 that day, you'd receive 1% of the daily token distribution. The more you spend and upload, the more you earn.",
   },
   {
     question: "Do I need to invest any money to start?",
     answer:
-      "No. NAM Rewards is completely free to download and use. You earn NAM Coins just from receipts of purchases you're already making. There's zero investment required — it's a risk-free way to get into crypto.",
+      "No. NAM Rewards is completely free to download and use. You earn NAM just from receipts of purchases you're already making. There's zero investment required — it's a risk-free way to get into crypto.",
   },
   {
     question: "What is a crypto wallet?",
     answer:
-      "A crypto wallet is like a digital bank account for cryptocurrency. NAM Rewards has a wallet built right into the app — it's created automatically when you sign up. Your NAM Coins go directly into this wallet. You can also use it to buy, sell, or send crypto.",
+      "A crypto wallet is like a digital bank account for cryptocurrency. NAM Rewards has a wallet built right into the app — it's created automatically when you sign up. Your NAM go directly into this wallet. You can also use it to buy, sell, or send crypto.",
   },
   {
     question: "What is a blockchain?",
@@ -40,14 +40,14 @@ const faqs = [
       "A blockchain is a public, digital ledger that records transactions. Think of it as a shared spreadsheet that no single person controls. NAM Coin lives on the Base blockchain, which means every transaction is transparent and verifiable. You don't need to understand blockchain to use NAM Rewards — the app handles everything for you.",
   },
   {
-    question: "Can I buy or sell NAM Coins?",
+    question: "Can I buy or sell NAM?",
     answer:
-      "Yes! The app has full buy and sell functionality built in. You can purchase NAM Coins using Apple Pay or bank transfer (fiat onramp), and sell them whenever you want.",
+      "Yes! The app has full buy and sell functionality built in. You can purchase NAM using Apple Pay or bank transfer (fiat onramp), and sell them whenever you want.",
   },
   {
-    question: "Can I send NAM Coins to someone else?",
+    question: "Can I send NAM to someone else?",
     answer:
-      "Absolutely. You can send NAM Coins (or other tokens) to any Base wallet address directly from the app. Full self-custody means you have complete control over your tokens.",
+      "Absolutely. You can send NAM (or other tokens) to any Base wallet address directly from the app. Full self-custody means you have complete control over your tokens.",
   },
   {
     question: "What receipts count?",

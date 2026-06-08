@@ -24,10 +24,9 @@ const problems = [
   },
   {
     icon: TrendingDown,
-    title: "Devalued whenever they want",
+    title: "You own nothing",
     description:
-      "The rules change without notice. A point worth a cent today can be worth half that tomorrow — and you have no say.",
-  },
+"You don&apos;t actually own any of the points nor decide how much they&apos;re worth. They expire over time and they can be de-valued by the company — you have no say.",  },
 ];
 
 export default function Problem() {
@@ -66,10 +65,10 @@ export default function Problem() {
               <span className="text-foreground/40">designed to disappear.</span>
             </>
           }
-          subtitle="Loyalty programs are built around expiry, friction, and fine print. You do the spending — they keep the leverage."
+          
         />
 
-        <div className="problem-grid grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 mt-16">
+        <div className="problem-grid grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 mt-8">
           {problems.map((p) => (
             <div
               key={p.title}
