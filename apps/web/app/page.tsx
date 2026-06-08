@@ -23,11 +23,11 @@ export default function Home() {
         <Problem />
         <Benefits />
         <HowItWorks />
-        <Mining />
-        <CryptoFeatures />
+        {/* <Mining /> */}
+        {/* <CryptoFeatures /> */}
         <Comparison />
-        <Tokenomics />
-        <Community />
+        {/* <Tokenomics />
+        <Community /> */}
         <FAQ />
         <CTA />
       </main>

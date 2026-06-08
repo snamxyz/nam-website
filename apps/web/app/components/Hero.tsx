@@ -83,20 +83,18 @@ export default function Hero() {
         {/* Headline */}
         <h1 className="overflow-hidden">
           <span className="hero-headline-line block text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.25rem] font-bold leading-[1.02] tracking-tight text-gradient-fade">
-            Get paid for the
+            Get paid
           </span>
           <span className="hero-headline-line block text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.25rem] font-bold leading-[1.02] tracking-tight text-gradient-green">
-            receipts you already have.
+            for your receipts.
           </span>
         </h1>
 
         {/* Subheadline */}
         <p className="hero-sub mt-7 text-base sm:text-lg md:text-xl text-foreground/55 max-w-2xl leading-relaxed">
-          Scan everyday receipts and mine{" "}
-          <span className="text-nam-green font-medium">NAM Coin</span> — real crypto
-          paid to your wallet the <span className="text-foreground font-medium">very next day</span>.
-          No spending. No minimums. Rewards that never expire.
-        </p>
+        Scan everyday receipts and earn <span className="text-nam-green font-medium">NAM</span> — real crypto paid to your wallet the very next day. Redeem instantly.{" "}
+          <span className="text-nam-green font-medium">No minimums and your rewards never expire.</span>
+        </p>  
 
         {/* CTAs */}
         <div className="hero-cta-wrap mt-9 flex flex-col sm:flex-row gap-3.5">
@@ -111,11 +109,13 @@ export default function Hero() {
 
         {/* Trust row */}
         <div className="hero-trust mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-foreground/40">
-          <span>Next-day payouts</span>
+          <span>Daily Payouts</span>
           <span className="hidden sm:inline w-px h-4 bg-nam-border" />
-          <span>$0 to start</span>
+          <span>Free & Easy to Earn</span>
         </div>
       </div>
     </section>
+
+ 
   );
 }
