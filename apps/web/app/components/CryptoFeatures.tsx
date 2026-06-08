@@ -5,52 +5,53 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import {
-  Apple,
-  CreditCard,
-  Send,
-  ArrowLeftRight,
   Wallet,
+  CreditCard,
+  ArrowLeftRight,
+  Send,
   ShieldCheck,
+  Coins,
 } from "lucide-react";
+import PhoneMockup from "@/app/components/PhoneMockup";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const features = [
   {
     icon: Wallet,
-    title: "Built-In Crypto Wallet",
+    title: "Built-in crypto wallet",
     description:
-      "A full crypto wallet built right into the app. Your NAM Coins go straight here — no external apps or browser extensions needed.",
-  },
-  {
-    icon: Apple,
-    title: "Fiat Onramp",
-    description:
-      "Buy crypto instantly with Apple Pay or bank transfer. Go from dollars to tokens in seconds, right inside NAM Rewards.",
-  },
-  {
-    icon: ArrowLeftRight,
-    title: "Buy & Sell Tokens",
-    description:
-      "Trade NAM Coins and other tokens directly within the app. Simple interface designed for everyone, not just crypto experts.",
-  },
-  {
-    icon: Send,
-    title: "Send to Any Wallet",
-    description:
-      "Send NAM Coins or other tokens to any Base wallet address. Full self-custody — you own and control your tokens.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Zero Risk Onboarding",
-    description:
-      "No money, no trading knowledge needed. Your everyday purchases introduce you to crypto and build your NAM Coin balance risk-free.",
+      "A full wallet lives inside the app. Your NAM Coin lands here — no extensions or external apps.",
   },
   {
     icon: CreditCard,
-    title: "Multiple Tokens",
+    title: "Buy with card or Apple Pay",
     description:
-      "Manage NAM Coin, USDC, ETH, and more — all from a single wallet. Your one-stop crypto hub.",
+      "Top up with card, Apple Pay, or bank transfer via Coinbase Pay. Dollars to tokens in seconds.",
+  },
+  {
+    icon: ArrowLeftRight,
+    title: "Swap & trade tokens",
+    description:
+      "Trade NAM, USDC, and ETH right inside the app. A simple interface built for everyone.",
+  },
+  {
+    icon: Send,
+    title: "Send to any wallet",
+    description:
+      "Send tokens to any Base address. Full self-custody — you own and control your crypto.",
+  },
+  {
+    icon: Coins,
+    title: "Multiple tokens, one hub",
+    description:
+      "Hold NAM Coin, USDC, ETH and more together. Your single crypto home.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Zero-risk onboarding",
+    description:
+      "No money or trading knowledge needed. Everyday receipts ease you into crypto, risk-free.",
   },
 ];
 
@@ -59,74 +60,85 @@ export default function CryptoFeatures() {
 
   useGSAP(
     () => {
-      gsap.fromTo(".cf-title",
-        { y: 40, opacity: 0 },
-        {
-          scrollTrigger: { trigger: ".cf-title", start: "top 85%" },
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.out",
-        }
-      );
-
-      gsap.fromTo(".cf-card",
-        { y: 60, opacity: 0 },
-        {
-          scrollTrigger: { trigger: ".cf-grid", start: "top 80%" },
-          y: 0,
-          opacity: 1,
-          duration: 0.7,
-          stagger: 0.1,
-          ease: "power3.out",
-        }
-      );
+      gsap.from(".cf-head", {
+        scrollTrigger: { trigger: ".cf-head", start: "top 85%" },
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+      gsap.from(".cf-phone", {
+        scrollTrigger: { trigger: ".cf-phones", start: "top 80%" },
+        y: 50,
+        opacity: 0,
+        duration: 0.9,
+        stagger: 0.15,
+        ease: "power3.out",
+      });
+      gsap.from(".cf-card", {
+        scrollTrigger: { trigger: ".cf-grid", start: "top 82%" },
+        y: 30,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.08,
+        ease: "power3.out",
+      });
     },
     { scope: sectionRef }
   );
 
   return (
     <section
-      id="features"
+      id="wallet"
       ref={sectionRef}
       className="relative py-24 md:py-32 px-6 overflow-hidden"
     >
-      {/* Background accent */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-2xl pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(1,210,67,0.04) 0%, transparent 60%)",
-        }}
-      />
-
-      <div className="mx-auto max-w-7xl">
-        <div className="cf-title text-center mb-16 md:mb-20">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
-            More Than{" "}
-            <span className="text-gradient-green">Mining</span>
-          </h2>
-          <p className="mt-4 text-foreground/50 text-base md:text-lg max-w-2xl mx-auto">
-            NAM Rewards combine crypto rewards with a true crypto wallet. Buy,
-            sell, send, and earn tokens — all from the convenience of one app.
-          </p>
+      <div className="mx-auto max-w-6xl relative grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+        {/* Left — phones */}
+        <div className="cf-phones relative flex justify-center items-center min-h-[480px] order-last lg:order-first">
+          <div className="cf-phone relative z-10 -rotate-3">
+            <PhoneMockup
+              src="/assets/app-send.png"
+              alt="Send tokens screen with token selector and amount input"
+              className="w-[225px] md:w-[245px]"
+            />
+          </div>
+          <div className="cf-phone absolute right-0 md:right-6 bottom-2 z-20 rotate-3">
+            <PhoneMockup
+              src="/assets/app-token-eth.png"
+              alt="Ethereum price detail with buy and sell actions"
+              className="w-[200px] md:w-[215px]"
+            />
+          </div>
         </div>
 
-        <div className="cf-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-          {features.map((feature) => (
-            <div
-              key={feature.title}
-              className="cf-card glass rounded-2xl p-6 md:p-8 hover:bg-white/[0.06] transition-all duration-300 group"
-            >
-              <div className="w-12 h-12 rounded-xl bg-nam-green/10 flex items-center justify-center mb-5 group-hover:bg-nam-green/20 transition-colors">
-                <feature.icon className="w-6 h-6 text-nam-green" />
+        {/* Right — copy + feature grid */}
+        <div>
+          <div className="cf-head max-w-xl">
+            <span className="eyebrow mb-4">More than rewards</span>
+            <h2 className="text-3xl sm:text-4xl md:text-[2.75rem] font-bold tracking-tight leading-[1.1] text-balance">
+              A full crypto wallet,{" "}
+              <span className="text-gradient-green">built right in.</span>
+            </h2>
+            <p className="mt-4 text-foreground/50 text-base md:text-lg leading-relaxed">
+              Buy, sell, send, swap, and earn — all from one app. No browser
+              extensions, no seed phrases, no second account.
+            </p>
+          </div>
+
+          <div className="cf-grid grid grid-cols-1 sm:grid-cols-2 gap-4 mt-9">
+            {features.map((f) => (
+              <div key={f.title} className="cf-card glass rounded-2xl p-5 card-hover">
+                <div className="w-10 h-10 rounded-xl bg-nam-green/10 flex items-center justify-center mb-3">
+                  <f.icon className="w-5 h-5 text-nam-green" />
+                </div>
+                <h3 className="text-sm font-semibold mb-1">{f.title}</h3>
+                <p className="text-xs text-foreground/45 leading-relaxed">
+                  {f.description}
+                </p>
               </div>
-              <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-              <p className="text-sm text-foreground/50 leading-relaxed">
-                {feature.description}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

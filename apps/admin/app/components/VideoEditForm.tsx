@@ -7,7 +7,7 @@ import { updateVideo } from "../actions";
 const initialState: ActionState = {};
 
 const inputClassName =
-  "w-full rounded-lg border border-nam-border bg-black/40 px-3 py-2 text-sm outline-none focus:border-nam-green";
+  "w-full rounded-lg border border-nam-border bg-white px-3 py-2 text-sm outline-none focus:border-nam-green";
 
 export type VideoEditDefaults = {
   videoId: string;
@@ -188,7 +188,7 @@ export default function VideoEditForm({ defaults }: { defaults: VideoEditDefault
           {pending ? "Saving..." : "Save video"}
         </button>
       </div>
-      {state.error ? <p className="lg:col-span-2 text-sm text-red-400">{state.error}</p> : null}
+      {state.error ? <p className="lg:col-span-2 text-sm text-red-500">{state.error}</p> : null}
     </form>
   );
 }

@@ -64,7 +64,7 @@ export default async function CampaignDetailPage({
               className="h-16 w-16 rounded-full border border-nam-border object-cover"
             />
           ) : (
-            <div className="flex h-16 w-16 items-center justify-center rounded-full border border-nam-border bg-white/5 text-xl font-semibold">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full border border-nam-border bg-black/[0.04] text-xl font-semibold">
               {stats.name.slice(0, 1).toUpperCase()}
             </div>
           )}
@@ -147,9 +147,9 @@ export default async function CampaignDetailPage({
 
         <div className="overflow-x-auto rounded-xl border border-nam-border">
           <table className="min-w-full text-left text-sm">
-            <thead className="border-b border-nam-border bg-white/5 text-foreground/70">
+            <thead className="border-b border-nam-border bg-black/[0.04] text-foreground/70">
               <tr>
-                <th className="sticky left-0 z-10 bg-white/5 px-4 py-3 font-medium">Video</th>
+                <th className="sticky left-0 z-10 bg-background px-4 py-3 font-medium">Video</th>
                 <th className="px-4 py-3 font-medium text-right">Views</th>
                 <th className="px-4 py-3 font-medium text-right">Likes</th>
                 <th className="px-4 py-3 font-medium text-right">Comments</th>
@@ -222,9 +222,9 @@ export default async function CampaignDetailPage({
               )}
             </tbody>
             {videos.length > 0 ? (
-              <tfoot className="border-t border-nam-border bg-white/5 font-semibold">
+              <tfoot className="border-t border-nam-border bg-black/[0.04] font-semibold">
                 <tr>
-                  <td className="sticky left-0 z-10 bg-white/5 px-4 py-3">Total</td>
+                  <td className="sticky left-0 z-10 bg-background px-4 py-3">Total</td>
                   <td className="px-4 py-3 text-right tabular-nums">
                     {stats.totalViews.toLocaleString()}
                   </td>

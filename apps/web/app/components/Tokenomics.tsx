@@ -4,12 +4,20 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import SectionHeading from "@/app/components/SectionHeading";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const distribution = [
   { label: "Users", percent: 50, amount: "7.2M", color: "#01D243" },
-  { label: "Treasury", percent: 50, amount: "7.2M", color: "#01D24380" },
+  { label: "Treasury", percent: 50, amount: "7.2M", color: "#01D24355" },
+];
+
+const figures = [
+  { value: "14.4M", label: "Daily mined supply" },
+  { value: "7.2M", label: "Allocated to users" },
+  { value: "7.2M", label: "Allocated to treasury" },
+  { value: "50/50", label: "User / treasury split" },
 ];
 
 export default function Tokenomics() {
@@ -17,19 +25,14 @@ export default function Tokenomics() {
 
   useGSAP(
     () => {
-      gsap.fromTo(
-        ".token-title",
-        { y: 40, opacity: 0 },
-        {
-          scrollTrigger: { trigger: ".token-title", start: "top 85%" },
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.out",
-        }
-      );
+      gsap.from(".token-title", {
+        scrollTrigger: { trigger: ".token-title", start: "top 85%" },
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      });
 
-      // Animate distribution bars
       gsap.from(".dist-bar-fill", {
         scrollTrigger: { trigger: ".dist-bars", start: "top 80%" },
         width: 0,
@@ -38,7 +41,6 @@ export default function Tokenomics() {
         ease: "power3.out",
       });
 
-      // Count up percentages
       distribution.forEach((item, i) => {
         const el = document.querySelector(`.dist-percent-${i}`);
         if (el) {
@@ -57,7 +59,7 @@ export default function Tokenomics() {
       });
 
       gsap.from(".token-stat-card", {
-        scrollTrigger: { trigger: ".token-stats", start: "top 80%" },
+        scrollTrigger: { trigger: ".token-stats", start: "top 82%" },
         y: 30,
         opacity: 0,
         duration: 0.6,
@@ -69,30 +71,24 @@ export default function Tokenomics() {
   );
 
   return (
-    <section
-      id="tokenomics"
-      ref={sectionRef}
-      className="relative py-24 md:py-32 px-6"
-    >
-      <div className="mx-auto max-w-7xl">
-        {/* Title */}
-        <div className="token-title text-center mb-16 md:mb-20">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
-            NAM Coin{" "}
-            <span className="text-gradient-green">Tokenomics</span>
-          </h2>
-          <p className="mt-4 text-foreground/50 text-base md:text-lg max-w-2xl mx-auto">
-          The tokenomics are modeled after Dogecoin. The only difference is the way they&apos;re mined — it&apos;s
-not through automated processors in data centers. Instead, Non-Automated Mined (NAM)
-tokens are different. They&apos;re mined through your consciousness and where you choose to
-spend your time and money.
-          </p>
-        </div>
+    <section id="tokenomics" ref={sectionRef} className="relative py-24 md:py-32 px-6">
+      <div className="mx-auto max-w-6xl">
+        <SectionHeading
+          className="token-title"
+          eyebrow="Tokenomics"
+          title={
+            <>
+              Modeled on Dogecoin —{" "}
+              <span className="text-gradient-green">mined by you.</span>
+            </>
+          }
+          subtitle="The supply model mirrors Dogecoin. The difference is how it's mined: not by automated rigs in data centers, but through where real people choose to spend their time and money."
+        />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start mt-16">
           {/* Distribution */}
           <div>
-            <h3 className="text-xl font-semibold mb-8">Token Distribution</h3>
+            <h3 className="text-lg font-semibold mb-7">Daily distribution</h3>
             <div className="dist-bars space-y-6">
               {distribution.map((item, i) => (
                 <div key={item.label}>
@@ -111,49 +107,38 @@ spend your time and money.
                       </span>
                     </div>
                   </div>
-                  <div className="w-full h-3 rounded-2xl bg-white/5 overflow-hidden">
+                  <div className="w-full h-3 rounded-full bg-black/[0.06] overflow-hidden">
                     <div
-                      className="dist-bar-fill h-full rounded-2xl"
-                      style={{
-                        width: `${item.percent}%`,
-                        background: item.color,
-                      }}
+                      className="dist-bar-fill h-full rounded-full"
+                      style={{ width: `${item.percent}%`, background: item.color }}
                     />
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-8 glass rounded-xl p-5">
-              <p className="text-sm text-foreground/50 leading-relaxed">
+            <div className="mt-8 glass rounded-2xl p-5">
+              <p className="text-sm text-foreground/55 leading-relaxed">
                 <span className="text-nam-green font-semibold">NAM</span> =
-                Non-Automated Mined tokens. Each receipt uploaded verifies
-                real-world spending and generates coins through on-chain mining.
-                No bots. No automation. Just real people earning real crypto.
+                Non-Automated Mined. Every receipt verifies real-world spending and
+                mints coins on-chain. No bots, no automation — just real people
+                earning real crypto.
               </p>
             </div>
           </div>
 
-          {/* Token Stats */}
+          {/* Key figures */}
           <div>
-            <h3 className="text-xl font-semibold mb-8">Key Figures</h3>
-            <div className="token-stats grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="token-stat-card glass rounded-xl p-5">
-                <p className="text-2xl font-bold font-mono text-nam-green">14.4M</p>
-                <p className="text-xs text-foreground/40 mt-1">Daily Mined Supply</p>
-              </div>
-              <div className="token-stat-card glass rounded-xl p-5">
-                <p className="text-2xl font-bold font-mono text-nam-green">7.2M</p>
-                <p className="text-xs text-foreground/40 mt-1">Allocated to Users</p>
-              </div>
-              <div className="token-stat-card glass rounded-xl p-5">
-                <p className="text-2xl font-bold font-mono text-nam-green">7.2M</p>
-                <p className="text-xs text-foreground/40 mt-1">Allocated to Treasury</p>
-              </div>
-              <div className="token-stat-card glass rounded-xl p-5">
-                <p className="text-2xl font-bold font-mono text-nam-green">50/50</p>
-                <p className="text-xs text-foreground/40 mt-1">User / Treasury Split</p>
-              </div>
+            <h3 className="text-lg font-semibold mb-7">Key figures</h3>
+            <div className="token-stats grid grid-cols-2 gap-4">
+              {figures.map((f) => (
+                <div key={f.label} className="token-stat-card glass rounded-2xl p-6 card-hover">
+                  <p className="text-2xl md:text-3xl font-bold font-mono text-nam-green">
+                    {f.value}
+                  </p>
+                  <p className="text-xs text-foreground/40 mt-1.5">{f.label}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

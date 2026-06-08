@@ -1,13 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #050505;
-  --foreground: #ededed;
-  --nam-green: #01D243;
-  --nam-green-dim: #01D24380;
+  color-scheme: light;
+  --background: #f5f6f7;
+  --foreground: #0a0b0c;
+  --nam-green: #01d243;
+  --nam-green-deep: #019e36;
+  --nam-green-dim: #01d24380;
   --nam-dark: #0a0a0a;
-  --nam-card: rgba(255, 255, 255, 0.04);
-  --nam-border: rgba(255, 255, 255, 0.08);
+  --nam-card: #ffffff;
+  --nam-border: rgba(16, 24, 40, 0.1);
 }
 
 @theme inline {
@@ -31,6 +33,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
@@ -40,26 +43,27 @@ body {
 
 /* Glow utility */
 .glow-green {
-  box-shadow: 0 0 40px rgba(1, 210, 67, 0.15), 0 0 80px rgba(1, 210, 67, 0.08);
+  box-shadow: 0 10px 40px -8px rgba(1, 210, 67, 0.35);
 }
 
 .glow-green-strong {
-  box-shadow: 0 0 60px rgba(1, 210, 67, 0.25), 0 0 120px rgba(1, 210, 67, 0.12);
+  box-shadow: 0 14px 50px -6px rgba(1, 210, 67, 0.45);
 }
 
 .text-gradient-green {
-  background: linear-gradient(135deg, #01D243 0%, #00ff55 50%, #01D243 100%);
+  background: linear-gradient(135deg, #019e36 0%, #01d243 50%, #019e36 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Glass card */
+/* Card */
 .glass {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--nam-card);
+  border: 1px solid var(--nam-border);
+  box-shadow:
+    0 1px 2px rgba(16, 24, 40, 0.04),
+    0 12px 28px -16px rgba(16, 24, 40, 0.12);
 }
 
 /* Reduced motion */

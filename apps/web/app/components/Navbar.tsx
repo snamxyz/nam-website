@@ -7,13 +7,14 @@ import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import DownloadButton from "@/app/components/DownloadButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const navLinks = [
   { label: "How It Works", href: "#how-it-works" },
-  { label: "Mining", href: "#mining" },
-  { label: "Features", href: "#features" },
+  { label: "Rewards", href: "#rewards" },
+  { label: "Wallet", href: "#wallet" },
   { label: "Tokenomics", href: "#tokenomics" },
   { label: "FAQ", href: "#faq" },
 ];
@@ -46,11 +47,7 @@ export default function Navbar() {
   });
 
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
@@ -73,54 +70,50 @@ export default function Navbar() {
     <>
       <nav
         ref={navRef}
-        className="fixed top-0 left-0 right-0 z-50 glass border-b backdrop-blur-2xl border-nam-border rounded-2xl mx-auto mt-4 w-[calc(100%-2rem)] md:w-[calc(100%-30rem)]"
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 glass-strong rounded-full w-[calc(100%-2rem)] max-w-3xl"
       >
-        <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-3">
+        <div className="px-3 pl-5 py-2.5 flex items-center justify-between">
+          <a href="#" className="flex items-center gap-2.5">
             <Image
               src="/assets/icon.svg"
               alt="NAM Rewards"
-              width={32}
-              height={32}
-              className="w-8 h-8 rounded-lg"
+              width={28}
+              height={28}
+              className="w-7 h-7 rounded-lg"
             />
-            <span className="text-lg font-bold tracking-tight">NAM</span>
+            <span className="text-base font-bold tracking-tight">NAM</span>
           </a>
 
           {/* Desktop */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-7">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
-                className="text-sm text-foreground/70 hover:text-nam-green transition-colors duration-200"
+                className="font-mono text-sm lowercase text-foreground/65 hover:text-nam-green transition-colors duration-200"
               >
                 {link.label}
               </a>
             ))}
-            <Link
-              href="/terms"
-              className="text-sm text-foreground/70 hover:text-nam-green transition-colors duration-200"
+          </div>
+
+          <div className="hidden md:block">
+            <DownloadButton
+              platform="ios"
+              className="font-mono text-sm font-semibold bg-nam-green text-black px-4 py-2.5 rounded-lg hover:brightness-110 transition-all duration-200"
             >
-              Terms
-            </Link>
-            <a
-              href="#download"
-              onClick={(e) => handleLinkClick(e, "#download")}
-              className="text-sm font-semibold bg-nam-green text-black px-5 py-2.5 rounded-2xl hover:brightness-110 transition-all duration-200"
-            >
-              Download App
-            </a>
+              ./download
+            </DownloadButton>
           </div>
 
           {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden text-foreground p-2"
+            className="md:hidden text-foreground p-1.5"
             aria-label="Toggle menu"
           >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </nav>
@@ -133,7 +126,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={(e) => handleLinkClick(e, link.href)}
-              className="text-2xl font-medium text-foreground/80 hover:text-nam-green transition-colors"
+              className="font-mono lowercase text-2xl font-medium text-foreground/80 hover:text-nam-green transition-colors"
             >
               {link.label}
             </a>
@@ -145,13 +138,12 @@ export default function Navbar() {
           >
             Terms
           </Link>
-          <a
-            href="#download"
-            onClick={(e) => handleLinkClick(e, "#download")}
-            className="text-lg font-semibold bg-nam-green text-black px-8 py-3 rounded-2xl hover:brightness-110 transition-all"
+          <DownloadButton
+            platform="ios"
+            className="mt-2 font-mono text-lg font-semibold bg-nam-green text-black px-8 py-3 rounded-lg hover:brightness-110 transition-all"
           >
-            Download App
-          </a>
+            ./download
+          </DownloadButton>
         </div>
       )}
     </>

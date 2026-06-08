@@ -145,13 +145,13 @@ export default function FAQ() {
       className="relative py-24 md:py-32 px-6"
     >
       <div className="mx-auto max-w-3xl">
-        <div className="faq-title text-center mb-16 md:mb-20">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
-            Frequently Asked{" "}
-            <span className="text-gradient-green">Questions</span>
+        <div className="faq-title text-center mb-14 md:mb-16">
+          <span className="eyebrow mb-4 justify-center">FAQ</span>
+          <h2 className="text-3xl sm:text-4xl md:text-[2.75rem] font-bold tracking-tight leading-[1.1]">
+            Questions? <span className="text-gradient-green">Answered.</span>
           </h2>
           <p className="mt-4 text-foreground/50 text-base md:text-lg">
-            New to crypto? No worries. We&apos;ve got you covered.
+            New to crypto? No worries — we&apos;ve got you covered.
           </p>
         </div>
 

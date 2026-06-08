@@ -3,8 +3,9 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import Image from "next/image";
+import { Star, ArrowRight } from "lucide-react";
 import DownloadButton from "@/app/components/DownloadButton";
+import TerminalWindow from "@/app/components/TerminalWindow";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -72,7 +73,6 @@ export default function Hero() {
         p.pulse += p.speed;
         const pulseFactor = Math.sin(p.pulse) * 0.5 + 0.5;
 
-        // Mouse proximity glow
         const dx = mouseX - p.baseX;
         const dy = mouseY - p.baseY;
         const dist = Math.sqrt(dx * dx + dy * dy);
@@ -82,7 +82,6 @@ export default function Hero() {
         const alpha = p.alpha + pulseFactor * 0.08 + influence * 0.4;
         const size = p.size + influence * 2;
 
-        // Subtle drift
         p.x = p.baseX + Math.sin(time * 0.0005 + p.pulse) * 2;
         p.y = p.baseY + Math.cos(time * 0.0005 + p.pulse) * 2;
 
@@ -91,7 +90,6 @@ export default function Hero() {
         ctx.fillStyle = `rgba(1, 210, 67, ${alpha})`;
         ctx.fill();
 
-        // Connection lines to nearby particles on mouse proximity
         if (influence > 0.1) {
           for (const other of particles) {
             const odx = p.x - other.x;
@@ -129,22 +127,14 @@ export default function Hero() {
     () => {
       const tl = gsap.timeline({
         defaults: { ease: "power4.out" },
-        delay: 0.2,
+        delay: 0.15,
       });
 
-      tl.fromTo(".hero-badge",
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6 }
-      )
+      tl.fromTo(".hero-badge", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 })
         .fromTo(
           ".hero-headline-line",
           { y: 80, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.9,
-            stagger: 0.12,
-          },
+          { y: 0, opacity: 1, duration: 0.9, stagger: 0.12 },
           "-=0.3"
         )
         .fromTo(
@@ -156,52 +146,27 @@ export default function Hero() {
         .fromTo(
           ".hero-cta",
           { y: 20, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.6,
-            stagger: 0.1,
-          },
+          { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 },
           "-=0.3"
         )
         .fromTo(
-          ".hero-stats > div",
+          ".hero-trust",
           { y: 20, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.5,
-            stagger: 0.08,
-          },
+          { y: 0, opacity: 1, duration: 0.5 },
           "-=0.2"
         )
         .fromTo(
-          ".hero-image",
-          { x: 60, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 1,
-            ease: "power3.out",
-          },
-          "-=0.8"
+          ".hero-term",
+          { y: 40, opacity: 0, scale: 0.98 },
+          { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" },
+          "-=0.1"
         )
         .fromTo(
-          ".hero-scroll",
-          { opacity: 0 },
-          { opacity: 1, duration: 0.6 },
-          "-=0.1"
+          ".term-line",
+          { opacity: 0, x: -8 },
+          { opacity: 1, x: 0, duration: 0.22, stagger: 0.11 },
+          "-=0.4"
         );
-
-      // Subtle floating on product image
-      gsap.to(".hero-image", {
-        y: -10,
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        delay: 1.5,
-      });
     },
     { scope: sectionRef }
   );
@@ -209,7 +174,7 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden"
+      className="relative flex flex-col items-center px-6 pt-36 pb-20 md:pt-40 md:pb-24 overflow-hidden"
     >
       {/* Particle canvas */}
       <canvas
@@ -218,127 +183,113 @@ export default function Hero() {
         style={{ opacity: 0.6 }}
       />
 
-      {/* Radial gradient overlays */}
+      {/* Dotted grid + radial glow */}
+      <div className="absolute inset-0 grid-bg pointer-events-none z-0" />
       <div className="absolute inset-0 pointer-events-none z-[1]">
+        <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[900px] h-[700px] glow-radial" />
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-2xl"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(1,210,67,0.08) 0%, transparent 60%)",
-          }}
-        />
-        <div
-          className="absolute top-0 left-0 right-0 h-32"
-          style={{
-            background:
-              "linear-gradient(to bottom, var(--background), transparent)",
-          }}
-        />
-        <div
-          className="absolute bottom-0 left-0 right-0 h-32"
-          style={{
-            background:
-              "linear-gradient(to top, var(--background), transparent)",
-          }}
+          className="absolute bottom-0 left-0 right-0 h-40"
+          style={{ background: "linear-gradient(to top, var(--background), transparent)" }}
         />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-center gap-12 lg:gap-16 max-w-7xl w-full mx-auto">
-        {/* Left: Text */}
-        <div className="flex flex-col items-center lg:items-start text-center lg:text-left flex-1">
-          {/* Badge */}
-          <div className="hero-badge mb-8">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-2xl glass text-xs font-medium text-nam-green tracking-wide uppercase">
-              <span className="w-1.5 h-1.5 rounded-2xl bg-nam-green animate-pulse" />
-              Live on iOS &amp; Android
+      <div className="relative z-10 flex flex-col items-center text-center max-w-4xl w-full mx-auto">
+        {/* Badge */}
+        <div className="hero-badge mb-7">
+          <span
+            className="mono-chip inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg glass"
+            style={{ color: "var(--nam-green-deep)" }}
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-nam-green opacity-75 animate-ping" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-nam-green" />
             </span>
-          </div>
-
-          {/* Headline */}
-          <h1 className="overflow-hidden">
-            <span className="hero-headline-line block text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] font-bold leading-[1.05] tracking-tight">
-              Mine Crypto From
-            </span>
-            <span className="hero-headline-line block text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] font-bold leading-[1.05] tracking-tight text-gradient-green">
-              Your Receipts
-            </span>
-          </h1>
-
-          {/* Subheadline */}
-          <p className="hero-sub mt-6 md:mt-8 text-base sm:text-lg md:text-xl text-foreground/50 max-w-2xl leading-relaxed">
-            Upload everyday receipts. Earn{" "}
-            <span className="text-nam-green font-medium">NAM Coins</span>{" "}
-            through on-chain mining. Get a powerful crypto wallet.
-            
-            <br className="hidden sm:block" />
-            Zero risk. Zero investment. Real crypto.
-          </p>
-
-          {/* CTAs */}
-          <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-4">
-            <DownloadButton
-              platform="ios"
-              className="hero-cta group relative px-8 py-3.5 bg-nam-green text-black font-semibold rounded-2xl hover:brightness-110 transition-all duration-200 text-center overflow-hidden"
-            >
-              <span className="relative z-10 flex items-center justify-center gap-2">
-                Download for iOS
-                <svg
-                  className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 7l5 5m0 0l-5 5m5-5H6"
-                  />
-                </svg>
-              </span>
-              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            </DownloadButton>
-            <DownloadButton
-              platform="android"
-              className="hero-cta px-8 py-3.5 border border-nam-border text-foreground/70 font-medium rounded-2xl hover:border-nam-green/30 hover:text-foreground hover:bg-nam-green/5 transition-all duration-200 text-center"
-            >
-              Download for Android
-            </DownloadButton>
-          </div>
-
-          {/* Stats strip */}
-          <div className="hero-stats mt-14 md:mt-16 flex flex-wrap items-center justify-center lg:justify-start gap-8 md:gap-12">
-            {[
-              { value: "On-Chain", label: "Mining" },
-              { value: "Zero", label: "Investment" },
-              { value: "Real-Time", label: "Insights" },
-            ].map((stat) => (
-              <div key={stat.label} className="flex flex-col items-center lg:items-start">
-                <span className="text-lg md:text-xl font-bold text-nam-green font-mono">
-                  {stat.value}
-                </span>
-                <span className="text-xs text-foreground/30 uppercase tracking-wider mt-0.5">
-                  {stat.label}
-                </span>
-              </div>
-            ))}
-          </div>
+            status: live · ios &amp; android
+          </span>
         </div>
 
-        {/* Right: Product demo image */}
-        <div className="hero-image flex-shrink-0 w-full max-w-sm lg:max-w-md xl:max-w-lg">
-          <Image
-            src="/assets/product_demo.png"
-            alt="NAM Rewards app showing wallet and earnings dashboard"
-            width={1200}
-            height={1200}
-            className="w-full h-auto drop-shadow-[0_0_60px_rgba(1,210,67,0.15)]"
-            priority
-          />
+        {/* Headline */}
+        <h1 className="overflow-hidden">
+          <span className="hero-headline-line block text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.25rem] font-bold leading-[1.02] tracking-tight text-gradient-fade">
+            Get paid for the
+          </span>
+          <span className="hero-headline-line block text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.25rem] font-bold leading-[1.02] tracking-tight text-gradient-green">
+            receipts you already have.
+          </span>
+        </h1>
+
+        {/* Subheadline */}
+        <p className="hero-sub mt-7 text-base sm:text-lg md:text-xl text-foreground/55 max-w-2xl leading-relaxed">
+          Scan everyday receipts and mine{" "}
+          <span className="text-nam-green font-medium">NAM Coin</span> — real crypto
+          paid to your wallet the <span className="text-foreground font-medium">very next day</span>.
+          No spending. No minimums. Rewards that never expire.
+        </p>
+
+        {/* CTAs */}
+        <div className="hero-cta-wrap mt-9 flex flex-col sm:flex-row gap-3.5">
+          <DownloadButton platform="ios" className="hero-cta btn-primary text-base group">
+            Start earning — it&apos;s free
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+          </DownloadButton>
+          <DownloadButton platform="android" className="hero-cta btn-secondary text-base">
+            Get it on Android
+          </DownloadButton>
+        </div>
+
+        {/* Trust row */}
+        <div className="hero-trust mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-foreground/40">
+          <span className="flex items-center gap-1.5">
+            <span className="flex">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="w-3.5 h-3.5 fill-nam-green text-nam-green" />
+              ))}
+            </span>
+            <span className="text-foreground/60 font-medium">5.0</span> on the App Store
+          </span>
+          <span className="hidden sm:inline w-px h-4 bg-nam-border" />
+          <span>Next-day payouts</span>
+          <span className="hidden sm:inline w-px h-4 bg-nam-border" />
+          <span>$0 to start</span>
+        </div>
+
+        {/* Terminal demo — the product's techy signature */}
+        <div className="hero-term mt-14 md:mt-16 w-full max-w-2xl text-left">
+          <TerminalWindow title="nam-rewards — zsh">
+            <div className="term-line">
+              <span className="t-prompt">$</span>{" "}
+              <span className="t-cmd">nam scan</span>{" "}
+              <span className="t-flag">./receipt-coffee.jpg</span>
+            </div>
+            <div className="term-line t-dim">  verifying receipt…</div>
+            <div className="term-line">
+              <span className="t-ok">  ✓ verified</span>{" "}
+              <span className="t-dim">· merchant: Daily Grind ·</span>{" "}
+              <span className="t-val">$6.82</span>
+            </div>
+            <div className="term-line">
+              <span className="t-ok">  + mined</span>{" "}
+              <span className="t-val">1,204.50 NAM</span>{" "}
+              <span className="t-dim">→ wallet · settles tomorrow</span>
+            </div>
+            <div className="term-line">&nbsp;</div>
+            <div className="term-line">
+              <span className="t-prompt">$</span>{" "}
+              <span className="t-cmd">nam balance</span>{" "}
+              <span className="t-flag">--usd</span>
+            </div>
+            <div className="term-line">
+              <span className="t-val">  54,926,510.71 NAM</span>{" "}
+              <span className="t-dim">≈</span> <span className="t-ok">$805.45</span>
+            </div>
+            <div className="term-line">
+              <span className="t-prompt">$</span>
+              <span className="cursor-blink">▋</span>
+            </div>
+          </TerminalWindow>
         </div>
       </div>
-
     </section>
   );
 }

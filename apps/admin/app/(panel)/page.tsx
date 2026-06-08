@@ -31,7 +31,7 @@ export default async function AdminDashboardPage() {
 
       <div className="overflow-x-auto rounded-xl border border-nam-border">
         <table className="min-w-full text-left text-sm">
-          <thead className="border-b border-nam-border bg-white/5 text-foreground/70">
+          <thead className="border-b border-nam-border bg-black/[0.04] text-foreground/70">
             <tr>
               <th className="px-4 py-3 font-medium">Creator</th>
               <th className="px-4 py-3 font-medium">Referral link</th>
@@ -111,7 +111,7 @@ export default async function AdminDashboardPage() {
         <h2 className="text-lg font-semibold">Archived creators</h2>
         <div className="overflow-x-auto rounded-xl border border-nam-border">
           <table className="min-w-full text-left text-sm">
-            <thead className="border-b border-nam-border bg-white/5 text-foreground/70">
+            <thead className="border-b border-nam-border bg-black/[0.04] text-foreground/70">
               <tr>
                 <th className="px-4 py-3 font-medium">Creator</th>
                 <th className="px-4 py-3 font-medium">Videos</th>

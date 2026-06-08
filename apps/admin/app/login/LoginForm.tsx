@@ -23,14 +23,14 @@ export default function LoginForm({ nextPath }: { nextPath?: string }) {
           autoComplete="off"
           inputMode="text"
           placeholder="Enter admin password"
-          className="w-full rounded-lg border border-nam-border bg-black/40 px-3 py-2 text-sm outline-none focus:border-nam-green"
+          className="w-full rounded-lg border border-nam-border bg-white px-3 py-2 text-sm outline-none focus:border-nam-green"
         />
         <p className="mt-1 text-xs text-foreground/50">
           Password only — no email required.
         </p>
       </div>
       {state.error ? (
-        <p className="text-sm text-red-400">{state.error}</p>
+        <p className="text-sm text-red-500">{state.error}</p>
       ) : null}
       <button
         type="submit"

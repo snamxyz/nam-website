@@ -4,18 +4,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { Mail } from "lucide-react";
 
-const footerLinks = [
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Mining", href: "#mining" },
-  { label: "Features", href: "#features" },
-  { label: "Tokenomics", href: "#tokenomics" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Download", href: "#download" },
-  { label: "Terms", href: "/terms" },
-];
-
-const socials = [
-  { icon: Mail, label: "Email Support", href: "mailto:support@nam.xyz" },
+const columns = [
+  {
+    title: "Product",
+    links: [
+      { label: "How It Works", href: "#how-it-works" },
+      { label: "Rewards", href: "#rewards" },
+      { label: "Wallet", href: "#wallet" },
+      { label: "Mining", href: "#mining" },
+    ],
+  },
+  {
+    title: "Learn",
+    links: [
+      { label: "Tokenomics", href: "#tokenomics" },
+      { label: "FAQ", href: "#faq" },
+      { label: "Download", href: "#download" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [{ label: "Terms of Use", href: "/terms" }],
+  },
 ];
 
 export default function Footer() {
@@ -30,12 +40,12 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-nam-border py-12 md:py-16 px-6">
-      <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 w-full">
-          {/* Logo + tagline */}
-          <div className="flex flex-col gap-3 w-1/4 max-lg:items-center max-lg:w-full">
-            <a href="#" className="flex items-center gap-3">
+    <footer className="relative border-t border-nam-border px-6 pt-16 pb-10">
+      <div className="mx-auto max-w-6xl">
+        <div className="grid grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr] gap-10 md:gap-8">
+          {/* Brand */}
+          <div className="col-span-2 md:col-span-1 max-w-xs">
+            <a href="#" className="flex items-center gap-2.5">
               <Image
                 src="/assets/icon.svg"
                 alt="NAM Rewards"
@@ -43,68 +53,62 @@ export default function Footer() {
                 height={28}
                 className="w-7 h-7"
               />
-              <span className="text-base font-bold tracking-tight">
-                NAM Rewards
-              </span>
+              <span className="text-base font-bold tracking-tight">NAM Rewards</span>
             </a>
-            <p className="text-xs text-foreground/40 max-w-xs max-lg:text-center">
-              Turning everyday purchases into crypto rewards. The universal
-              rewards layer for real-world spending.
+            <p className="mt-4 text-sm text-foreground/40 leading-relaxed">
+              Turning everyday receipts into crypto you actually own. The rewards
+              layer for real-world spending.
             </p>
+            <a
+              href="mailto:support@nam.xyz"
+              className="mt-5 inline-flex items-center gap-2 text-sm text-foreground/50 hover:text-nam-green transition-colors"
+            >
+              <Mail className="w-4 h-4" />
+              support@nam.xyz
+            </a>
           </div>
 
-          {/* Links */}
-          <div className="flex flex-wrap gap-6 w-1/2 justify-center max-lg:w-full">
-            {footerLinks.map((link) =>
-              link.href.startsWith("/") ? (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="text-sm text-foreground/50 hover:text-nam-green transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ) : (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={(e) => handleClick(e, link.href)}
-                  className="text-sm text-foreground/50 hover:text-nam-green transition-colors"
-                >
-                  {link.label}
-                </a>
-              )
-            )}
-          </div>
-
-          {/* Socials */}
-          <div className="flex gap-3 w-1/4 justify-end max-lg:justify-center max-lg:w-full">
-            {socials.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                aria-label={social.label}
-                className="w-10 h-10 rounded-2xl glass flex items-center justify-center hover:bg-white/[0.08] transition-all duration-200 group"
-              >
-                <social.icon className="w-4 h-4 text-foreground/50 group-hover:text-nam-green transition-colors" />
-              </a>
-            ))}
-          </div>
+          {/* Link columns */}
+          {columns.map((col) => (
+            <div key={col.title}>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground/40 mb-4">
+                {col.title}
+              </h4>
+              <ul className="space-y-3">
+                {col.links.map((link) =>
+                  link.href.startsWith("/") ? (
+                    <li key={link.label}>
+                      <Link
+                        href={link.href}
+                        className="text-sm text-foreground/55 hover:text-nam-green transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ) : (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        onClick={(e) => handleClick(e, link.href)}
+                        className="text-sm text-foreground/55 hover:text-nam-green transition-colors"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  )
+                )}
+              </ul>
+            </div>
+          ))}
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-10 pt-6 border-t border-nam-border flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-14 pt-6 border-t border-nam-border flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-foreground/30">
             &copy; {new Date().getFullYear()} NAM Rewards. All rights reserved.
           </p>
-          <Link
-            href="/terms"
-            className="text-xs text-foreground/30 hover:text-nam-green transition-colors"
-          >
-            Terms of Use
-          </Link>
-          <p className="text-xs text-foreground/20">
-            NAM Coins are Non-Automated Mined tokens.
+          <p className="text-xs text-foreground/25">
+            NAM Coin — Non-Automated Mined tokens on Base.
           </p>
         </div>
       </div>

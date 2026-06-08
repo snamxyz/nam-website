@@ -23,7 +23,7 @@ export default function AdminPanelLayout({
           <form action={logoutAction}>
             <button
               type="submit"
-              className="rounded-lg border border-nam-border px-3 py-1.5 text-sm transition hover:bg-white/5"
+              className="rounded-lg border border-nam-border px-3 py-1.5 text-sm transition hover:bg-black/[0.04]"
             >
               Log out
             </button>

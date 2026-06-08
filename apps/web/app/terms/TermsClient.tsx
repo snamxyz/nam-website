@@ -224,7 +224,7 @@ function SectionRow({ section }: { section: Section }) {
         </h3>
 
         {isLegal && content && (
-          <div className="rounded-xl border border-nam-border bg-white/[0.02] p-4">
+          <div className="rounded-xl border border-nam-border bg-black/[0.02] p-4">
             <p className="text-xs font-mono text-foreground/45 leading-relaxed tracking-wide">
               {content}
             </p>
@@ -299,17 +299,7 @@ export default function TermsClient() {
 
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-5">
             Terms &amp;{" "}
-            <span
-              style={{
-                background:
-                  "linear-gradient(135deg, #01D243 0%, #00ff55 50%, #01D243 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              Privacy
-            </span>
+            <span className="text-gradient-green">Privacy</span>
           </h1>
 
           <p className="text-sm text-foreground/40">
@@ -362,7 +352,7 @@ export default function TermsClient() {
           </div>
 
           {/* Contact footer */}
-          <div className="mt-16 rounded-2xl border border-nam-border bg-white/[0.02] p-8 text-center relative overflow-hidden">
+          <div className="mt-16 rounded-2xl border border-nam-border bg-black/[0.02] p-8 text-center relative overflow-hidden">
             <div
               className="pointer-events-none absolute inset-0"
               style={{

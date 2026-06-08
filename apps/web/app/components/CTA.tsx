@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Apple, Smartphone } from "lucide-react";
+import Image from "next/image";
 import DownloadButton from "@/app/components/DownloadButton";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,8 +15,8 @@ export default function CTA() {
 
   useGSAP(
     () => {
-      gsap.from(".cta-content", {
-        scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
+      gsap.from(".cta-card", {
+        scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
         y: 50,
         opacity: 0,
         duration: 0.8,
@@ -26,51 +27,43 @@ export default function CTA() {
   );
 
   return (
-    <section
-      id="download"
-      ref={sectionRef}
-      className="relative py-24 md:py-32 px-6 overflow-hidden"
-    >
-      {/* Background glow */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-2xl pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(1,210,67,0.12) 0%, rgba(1,210,67,0.03) 40%, transparent 70%)",
-        }}
-      />
+    <section id="download" ref={sectionRef} className="relative py-20 md:py-28 px-6">
+      <div className="cta-card relative mx-auto max-w-4xl overflow-hidden rounded-[2rem] border border-nam-border glass-strong px-6 py-16 md:py-20 text-center">
+        {/* Glow + grid */}
+       
+        <div className="relative">
+          <Image
+            src="/assets/icon.svg"
+            alt="NAM Rewards"
+            width={56}
+            height={56}
+            className="w-14 h-14 mx-auto mb-7 drop-shadow-[0_0_30px_rgba(1,210,67,0.4)]"
+          />
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] text-balance">
+            Your next receipt is
+            <br className="hidden sm:block" />{" "}
+            <span className="text-gradient-green">already worth something.</span>
+          </h2>
+          <p className="mt-5 text-foreground/55 text-base md:text-lg max-w-lg mx-auto leading-relaxed">
+            Download NAM Rewards, scan a receipt, and watch real crypto land in
+            your wallet tomorrow. Free to start — no investment required.
+          </p>
 
-      <div className="cta-content relative mx-auto max-w-2xl text-center">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
-          Start{" "}
-          <span className="text-gradient-green">Mining</span>{" "}
-          Today
-        </h2>
-        <p className="mt-4 text-foreground/50 text-base md:text-lg max-w-lg mx-auto">
-          Download NAM Rewards and turn your everyday receipts into crypto.
-          Available now on iOS and Android.
-        </p>
+          <div className="mt-9 flex flex-col sm:flex-row gap-3.5 justify-center">
+            <DownloadButton platform="ios" className="btn-primary text-base glow-green">
+              <Apple className="w-5 h-5" />
+              Download for iOS
+            </DownloadButton>
+            <DownloadButton platform="android" className="btn-secondary text-base">
+              <Smartphone className="w-5 h-5" />
+              Download for Android
+            </DownloadButton>
+          </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-          <DownloadButton
-            platform="ios"
-            className="group relative px-8 py-3.5 bg-nam-green text-black font-semibold rounded-2xl hover:brightness-110 transition-all duration-200 text-center overflow-hidden flex items-center justify-center gap-2 glow-green"
-          >
-            <Apple className="w-5 h-5" />
-            Download for iOS
-          </DownloadButton>
-          <DownloadButton
-            platform="android"
-            className="px-8 py-3.5 border border-nam-border text-foreground/70 font-medium rounded-2xl hover:border-nam-green/30 hover:text-foreground hover:bg-nam-green/5 transition-all duration-200 text-center flex items-center justify-center gap-2"
-          >
-            <Smartphone className="w-5 h-5" />
-            Download for Android
-          </DownloadButton>
+          <p className="mt-5 text-xs text-foreground/30">
+            Free to download · Next-day payouts · Rewards never expire
+          </p>
         </div>
-
-        <p className="mt-4 text-xs text-foreground/30">
-          Free to download. No investment required to start earning.
-        </p>
       </div>
     </section>
   );
