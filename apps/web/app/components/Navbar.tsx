@@ -91,7 +91,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
-                className="font-mono text-sm lowercase text-foreground/65 hover:text-nam-green transition-colors duration-200"
+                className="text-sm text-foreground/65 hover:text-nam-green transition-colors duration-200"
               >
                 {link.label}
               </a>
@@ -101,9 +101,9 @@ export default function Navbar() {
           <div className="hidden md:block">
             <DownloadButton
               platform="ios"
-              className="font-mono text-sm font-semibold bg-nam-green text-black px-4 py-2.5 rounded-lg hover:brightness-110 transition-all duration-200"
+              className="text-sm font-semibold bg-nam-green text-black px-5 py-2.5 rounded-full hover:brightness-110 transition-all duration-200"
             >
-              ./download
+              Download
             </DownloadButton>
           </div>
 
@@ -126,7 +126,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={(e) => handleLinkClick(e, link.href)}
-              className="font-mono lowercase text-2xl font-medium text-foreground/80 hover:text-nam-green transition-colors"
+              className="text-2xl font-medium text-foreground/80 hover:text-nam-green transition-colors"
             >
               {link.label}
             </a>
@@ -140,9 +140,9 @@ export default function Navbar() {
           </Link>
           <DownloadButton
             platform="ios"
-            className="mt-2 font-mono text-lg font-semibold bg-nam-green text-black px-8 py-3 rounded-lg hover:brightness-110 transition-all"
+            className="mt-2 text-lg font-semibold bg-nam-green text-black px-8 py-3 rounded-full hover:brightness-110 transition-all"
           >
-            ./download
+            Download App
           </DownloadButton>
         </div>
       )}

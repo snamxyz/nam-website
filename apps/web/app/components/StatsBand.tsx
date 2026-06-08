@@ -10,8 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 const stats = [
   { value: 14.4, suffix: "M", decimals: 1, label: "NAM mined every day" },
   { value: 50, suffix: "%", decimals: 0, label: "Goes straight to users" },
-  { value: 0, prefix: "$", suffix: "", decimals: 0, label: "Minimum to cash out" },
-  { value: 5.0, suffix: "★", decimals: 1, label: "Rated on the App Store" },
+  { value: 0, prefix: "$", suffix: "", decimals: 0, label: "Minimum to cash out" }
 ];
 
 export default function StatsBand() {
@@ -52,7 +51,7 @@ export default function StatsBand() {
   return (
     <section ref={sectionRef} className="relative px-6">
       <div className="mx-auto max-w-5xl glass-strong rounded-3xl px-6 py-10 md:py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4">
           {stats.map((stat, i) => (
             <div key={stat.label} className="stat-item text-center">
               <p
@@ -62,7 +61,7 @@ export default function StatsBand() {
                 {stat.value.toFixed(stat.decimals)}
                 {stat.suffix}
               </p>
-              <p className="mt-2 font-mono lowercase text-xs md:text-sm text-foreground/45 leading-snug">
+              <p className="mt-2 text-xs md:text-sm text-foreground/45 leading-snug">
                 {stat.label}
               </p>
             </div>
