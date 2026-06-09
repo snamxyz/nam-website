@@ -24,34 +24,34 @@ const allocation: Slice[] = [
     color: "#01d243",
     note: "Split across everyone who uploads verified receipts, every single day.",
   },
+  // {
+  //   label: "Liquidity",
+  //   percent: 20,
+  //   amount: "2.88M / day",
+  //   color: "#019e36",
+  //   note: "Seeds deep on-chain liquidity so NAM stays easy to buy, sell, and swap.",
+  // },
   {
-    label: "Liquidity",
-    percent: 20,
-    amount: "2.88M / day",
-    color: "#019e36",
-    note: "Seeds deep on-chain liquidity so NAM stays easy to buy, sell, and swap.",
-  },
-  {
-    label: "Treasury & ops",
-    percent: 15,
-    amount: "2.16M / day",
+    label: "Treasury",
+    percent: 50,
+    amount: "7.2M / day",
     color: "#0a8a32",
     note: "Funds infrastructure, receipt verification, and ongoing development.",
   },
-  {
-    label: "Team",
-    percent: 10,
-    amount: "1.44M / day",
-    color: "#15ff5e",
-    note: "Vested over time to keep the team aligned with the network long term.",
-  },
-  {
-    label: "Ecosystem",
-    percent: 5,
-    amount: "0.72M / day",
-    color: "#7af2a3",
-    note: "Partnerships, marketing, and grants that grow the network of earners.",
-  },
+  // {
+  //   label: "Team",
+  //   percent: 10,
+  //   amount: "1.44M / day",
+  //   color: "#15ff5e",
+  //   note: "Vested over time to keep the team aligned with the network long term.",
+  // },
+  // {
+  //   label: "Ecosystem",
+  //   percent: 5,
+  //   amount: "0.72M / day",
+  //   color: "#7af2a3",
+  //   note: "Partnerships, marketing, and grants that grow the network of earners.",
+  // },
 ];
 
 // Donut geometry
