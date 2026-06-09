@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Mining from "../components/Mining";
 import TokenHero from "../components/token/TokenHero";
+import TokenEarning from "../components/token/TokenEarning";
 import TokenParameters from "../components/token/TokenParameters";
 import TokenAllocation from "../components/token/TokenAllocation";
 import TokenSupply from "../components/token/TokenSupply";
@@ -20,6 +21,7 @@ export default function TokenomicsPage() {
       <Navbar />
       <main>
         <TokenHero />
+        <TokenEarning />
         <TokenParameters />
         <Mining />
         <TokenAllocation />
