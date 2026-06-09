@@ -25,21 +25,29 @@ export default function Tokenomics() {
 
   useGSAP(
     () => {
-      gsap.from(".token-title", {
-        scrollTrigger: { trigger: ".token-title", start: "top 85%" },
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      });
+      gsap.fromTo(
+        ".token-title",
+        { y: 40, opacity: 0 },
+        {
+          scrollTrigger: { trigger: ".token-title", start: "top 85%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        }
+      );
 
-      gsap.from(".dist-bar-fill", {
-        scrollTrigger: { trigger: ".dist-bars", start: "top 80%" },
-        width: 0,
-        duration: 1,
-        stagger: 0.15,
-        ease: "power3.out",
-      });
+      gsap.fromTo(
+        ".dist-bar-fill",
+        { width: 0 },
+        {
+          scrollTrigger: { trigger: ".dist-bars", start: "top 80%" },
+          width: (_i, target) => (target as HTMLElement).style.width,
+          duration: 1,
+          stagger: 0.15,
+          ease: "power3.out",
+        }
+      );
 
       distribution.forEach((item, i) => {
         const el = document.querySelector(`.dist-percent-${i}`);
@@ -58,14 +66,18 @@ export default function Tokenomics() {
         }
       });
 
-      gsap.from(".token-stat-card", {
-        scrollTrigger: { trigger: ".token-stats", start: "top 82%" },
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power3.out",
-      });
+      gsap.fromTo(
+        ".token-stat-card",
+        { y: 30, opacity: 0 },
+        {
+          scrollTrigger: { trigger: ".token-stats", start: "top 82%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power3.out",
+        }
+      );
     },
     { scope: sectionRef }
   );

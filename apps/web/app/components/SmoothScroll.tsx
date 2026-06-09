@@ -29,7 +29,16 @@ export default function SmoothScroll({
     });
     gsap.ticker.lagSmoothing(0);
 
+    // Recompute every ScrollTrigger's start/end once the final layout settles
+    // (web fonts + images can reflow after hydration and shift trigger points).
+    const refresh = () => ScrollTrigger.refresh();
+    window.addEventListener("load", refresh);
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(refresh);
+    }
+
     return () => {
+      window.removeEventListener("load", refresh);
       lenis.destroy();
       gsap.ticker.remove(lenis.raf);
     };

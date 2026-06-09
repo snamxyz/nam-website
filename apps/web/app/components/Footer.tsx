@@ -2,24 +2,24 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Mail } from "lucide-react";
 
 const columns = [
   {
     title: "Product",
     links: [
-      { label: "How It Works", href: "#how-it-works" },
-      { label: "Rewards", href: "#rewards" },
-      { label: "Wallet", href: "#wallet" },
-      { label: "Mining", href: "#mining" },
+      { label: "How It Works", href: "/#how-it-works" },
+      { label: "Rewards", href: "/#rewards" },
     ],
   },
   {
     title: "Learn",
     links: [
-      { label: "Tokenomics", href: "#tokenomics" },
-      { label: "FAQ", href: "#faq" },
-      { label: "Download", href: "#download" },
+      { label: "Tokenomics", href: "/tokenomics" },
+      { label: "Blog", href: "/blog" },
+      { label: "FAQ", href: "/faq" },
+      { label: "Download", href: "/#download" },
     ],
   },
   {
@@ -29,12 +29,23 @@ const columns = [
 ];
 
 export default function Footer() {
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith("#")) {
+  const pathname = usePathname();
+
+  const handleHashClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    const hashIndex = href.indexOf("#");
+    if (hashIndex === -1) return;
+
+    const hash = href.slice(hashIndex);
+
+    if (pathname === "/") {
       e.preventDefault();
-      const target = document.querySelector(href);
+      const target = document.querySelector(hash);
       if (target) {
         target.scrollIntoView({ behavior: "smooth" });
+        window.history.replaceState(null, "", hash);
       }
     }
   };
@@ -45,7 +56,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr] gap-10 md:gap-8">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1 max-w-xs">
-            <a href="#" className="flex items-center gap-2.5">
+            <Link href="/" className="flex items-center gap-2.5">
               <Image
                 src="/assets/icon.svg"
                 alt="NAM Rewards"
@@ -54,7 +65,7 @@ export default function Footer() {
                 className="w-7 h-7"
               />
               <span className="text-base font-bold tracking-tight">NAM Rewards</span>
-            </a>
+            </Link>
             <p className="mt-4 text-sm text-foreground/40 leading-relaxed">
               Turning everyday receipts into crypto you actually own. The rewards
               layer for real-world spending.
@@ -76,10 +87,11 @@ export default function Footer() {
               </h4>
               <ul className="space-y-3">
                 {col.links.map((link) =>
-                  link.href.startsWith("/") ? (
+                  link.href.includes("#") ? (
                     <li key={link.label}>
                       <Link
                         href={link.href}
+                        onClick={(e) => handleHashClick(e, link.href)}
                         className="text-sm text-foreground/55 hover:text-nam-green transition-colors"
                       >
                         {link.label}
@@ -87,13 +99,12 @@ export default function Footer() {
                     </li>
                   ) : (
                     <li key={link.label}>
-                      <a
+                      <Link
                         href={link.href}
-                        onClick={(e) => handleClick(e, link.href)}
                         className="text-sm text-foreground/55 hover:text-nam-green transition-colors"
                       >
                         {link.label}
-                      </a>
+                      </Link>
                     </li>
                   )
                 )}
@@ -108,7 +119,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} NAM Rewards. All rights reserved.
           </p>
           <p className="text-xs text-foreground/25">
-            NAM Coin — Non-Automated Mined tokens on Base.
+            NAM — Non-Automated Mined tokens on Base.
           </p>
         </div>
       </div>

@@ -21,7 +21,7 @@ const features = [
     icon: Wallet,
     title: "Built-in crypto wallet",
     description:
-      "A full wallet lives inside the app. Your NAM Coin lands here — no extensions or external apps.",
+      "A full wallet lives inside the app. Your NAM lands here — no extensions or external apps.",
   },
   {
     icon: CreditCard,
@@ -45,7 +45,7 @@ const features = [
     icon: Coins,
     title: "Multiple tokens, one hub",
     description:
-      "Hold NAM Coin, USDC, ETH and more together. Your single crypto home.",
+      "Hold NAM, USDC, ETH and more together. Your single crypto home.",
   },
   {
     icon: ShieldCheck,
@@ -60,29 +60,41 @@ export default function CryptoFeatures() {
 
   useGSAP(
     () => {
-      gsap.from(".cf-head", {
-        scrollTrigger: { trigger: ".cf-head", start: "top 85%" },
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      });
-      gsap.from(".cf-phone", {
-        scrollTrigger: { trigger: ".cf-phones", start: "top 80%" },
-        y: 50,
-        opacity: 0,
-        duration: 0.9,
-        stagger: 0.15,
-        ease: "power3.out",
-      });
-      gsap.from(".cf-card", {
-        scrollTrigger: { trigger: ".cf-grid", start: "top 82%" },
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.08,
-        ease: "power3.out",
-      });
+      gsap.fromTo(
+        ".cf-head",
+        { y: 40, opacity: 0 },
+        {
+          scrollTrigger: { trigger: ".cf-head", start: "top 85%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        }
+      );
+      gsap.fromTo(
+        ".cf-phone",
+        { y: 50, opacity: 0 },
+        {
+          scrollTrigger: { trigger: ".cf-phones", start: "top 80%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          stagger: 0.15,
+          ease: "power3.out",
+        }
+      );
+      gsap.fromTo(
+        ".cf-card",
+        { y: 30, opacity: 0 },
+        {
+          scrollTrigger: { trigger: ".cf-grid", start: "top 82%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.08,
+          ease: "power3.out",
+        }
+      );
     },
     { scope: sectionRef }
   );

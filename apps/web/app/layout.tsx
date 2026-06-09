@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     "NAM Rewards",
     "crypto rewards",
     "receipt mining",
-    "NAM Coin",
+    "NAM",
     "decentralized finance",
   ],
   icons: {

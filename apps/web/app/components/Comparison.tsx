@@ -24,29 +24,41 @@ export default function Comparison() {
 
   useGSAP(
     () => {
-      gsap.from(".cmp-title", {
-        scrollTrigger: { trigger: ".cmp-title", start: "top 85%" },
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      });
-      gsap.from(".cmp-table", {
-        scrollTrigger: { trigger: ".cmp-table", start: "top 82%" },
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      });
-      gsap.from(".cmp-row", {
-        scrollTrigger: { trigger: ".cmp-table", start: "top 78%" },
-        opacity: 0,
-        x: -16,
-        duration: 0.5,
-        stagger: 0.08,
-        ease: "power2.out",
-        delay: 0.2,
-      });
+      gsap.fromTo(
+        ".cmp-title",
+        { y: 40, opacity: 0 },
+        {
+          scrollTrigger: { trigger: ".cmp-title", start: "top 85%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        }
+      );
+      gsap.fromTo(
+        ".cmp-table",
+        { y: 40, opacity: 0 },
+        {
+          scrollTrigger: { trigger: ".cmp-table", start: "top 82%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        }
+      );
+      gsap.fromTo(
+        ".cmp-row",
+        { opacity: 0, x: -16 },
+        {
+          scrollTrigger: { trigger: ".cmp-table", start: "top 78%" },
+          opacity: 1,
+          x: 0,
+          duration: 0.5,
+          stagger: 0.08,
+          ease: "power2.out",
+          delay: 0.2,
+        }
+      );
     },
     { scope: sectionRef }
   );

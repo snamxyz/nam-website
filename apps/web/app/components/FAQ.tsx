@@ -15,9 +15,9 @@ const faqs = [
       "NAM Rewards is an app that lets you earn cryptocurrency (NAM) just by uploading photos of your everyday receipts. You spend money like normal — on groceries, coffee, gas, online shopping — then snap your receipt and earn crypto.",
   },
   {
-    question: "What is NAM Coin?",
+    question: "What is NAM?",
     answer:
-      "NAM stands for Non-Automated Mined. NAM Coin is a cryptocurrency token on the Base blockchain. It's mined by real people uploading real receipts — no bots, no automated farming. There are 14.4 million tokens created daily, split 50/50 between users and the treasury.",
+      "NAM stands for Non-Automated Mined. NAM is a cryptocurrency token on the Base blockchain. It's mined by real people uploading real receipts — no bots, no automated farming. There are 14.4 million tokens created daily, split 50/50 between users and the treasury.",
   },
   {
     question: "How does mining work?",
@@ -37,7 +37,7 @@ const faqs = [
   {
     question: "What is a blockchain?",
     answer:
-      "A blockchain is a public, digital ledger that records transactions. Think of it as a shared spreadsheet that no single person controls. NAM Coin lives on the Base blockchain, which means every transaction is transparent and verifiable. You don't need to understand blockchain to use NAM Rewards — the app handles everything for you.",
+      "A blockchain is a public, digital ledger that records transactions. Think of it as a shared spreadsheet that no single person controls. NAM lives on the Base blockchain, which means every transaction is transparent and verifiable. You don't need to understand blockchain to use NAM Rewards — the app handles everything for you.",
   },
   {
     question: "Can I buy or sell NAM?",
@@ -119,21 +119,29 @@ export default function FAQ() {
 
   useGSAP(
     () => {
-      gsap.from(".faq-title", {
-        scrollTrigger: { trigger: ".faq-title", start: "top 85%" },
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      });
+      gsap.fromTo(
+        ".faq-title",
+        { y: 40, opacity: 0 },
+        {
+          scrollTrigger: { trigger: ".faq-title", start: "top 85%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        }
+      );
 
-      gsap.from(".faq-list", {
-        scrollTrigger: { trigger: ".faq-list", start: "top 85%" },
-        y: 30,
-        opacity: 0,
-        duration: 0.7,
-        ease: "power3.out",
-      });
+      gsap.fromTo(
+        ".faq-list",
+        { y: 30, opacity: 0 },
+        {
+          scrollTrigger: { trigger: ".faq-list", start: "top 85%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          ease: "power3.out",
+        }
+      );
     },
     { scope: sectionRef }
   );
@@ -142,7 +150,7 @@ export default function FAQ() {
     <section
       id="faq"
       ref={sectionRef}
-      className="relative py-24 md:py-32 px-6"
+      className="relative px-6"
     >
       <div className="mx-auto max-w-3xl">
         <div className="faq-title text-center mb-14 md:mb-16">

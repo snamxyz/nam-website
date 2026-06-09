@@ -35,28 +35,40 @@ export default function Community() {
 
   useGSAP(
     () => {
-      gsap.from(".comm-text", {
-        scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
-        x: -30,
-        opacity: 0,
-        duration: 0.7,
-        ease: "power3.out",
-      });
-      gsap.from(".comm-row", {
-        scrollTrigger: { trigger: ".comm-list", start: "top 82%" },
-        y: 24,
-        opacity: 0,
-        duration: 0.5,
-        stagger: 0.12,
-        ease: "power3.out",
-      });
-      gsap.from(".comm-phone", {
-        scrollTrigger: { trigger: sectionRef.current, start: "top 78%" },
-        y: 50,
-        opacity: 0,
-        duration: 0.9,
-        ease: "power3.out",
-      });
+      gsap.fromTo(
+        ".comm-text",
+        { x: -30, opacity: 0 },
+        {
+          scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
+          x: 0,
+          opacity: 1,
+          duration: 0.7,
+          ease: "power3.out",
+        }
+      );
+      gsap.fromTo(
+        ".comm-row",
+        { y: 24, opacity: 0 },
+        {
+          scrollTrigger: { trigger: ".comm-list", start: "top 82%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          stagger: 0.12,
+          ease: "power3.out",
+        }
+      );
+      gsap.fromTo(
+        ".comm-phone",
+        { y: 50, opacity: 0 },
+        {
+          scrollTrigger: { trigger: sectionRef.current, start: "top 78%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          ease: "power3.out",
+        }
+      );
     },
     { scope: sectionRef }
   );

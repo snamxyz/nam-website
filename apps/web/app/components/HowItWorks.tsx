@@ -18,7 +18,7 @@ const steps = [
     description:
       "Enter your mobile number and a secure crypto wallet is created for you in seconds, powered by Privy. No seed phrases, no jargon, no crypto experience required.",
     chip: "Wallet ready in under a minute",
-    image: "/assets/app-home.png",
+    image: "/assets/app-wallet.png",
     alt: "NAM Rewards home screen with balance and daily rewards",
   },
   {
@@ -36,9 +36,9 @@ const steps = [
     number: "03",
     title: "Get paid the next day",
     description:
-      "NAM Coin is mined to your wallet the very next day. Hold it, send it, swap it for USDC or ETH, or cash out — there are no minimums and nothing ever expires.",
+      "NAM is mined to your wallet the very next day. Hold it, send it, swap it for USDC or ETH, or cash out — there are no minimums and nothing ever expires.",
     chip: "Hold, trade, or redeem instantly",
-    image: "/assets/app-deposit.png",
+    image: "/assets/home-page.png",
     alt: "Deposit and cash-out options in the app",
   },
 ];
@@ -48,31 +48,43 @@ export default function HowItWorks() {
 
   useGSAP(
     () => {
-      gsap.from(".hw-title", {
-        scrollTrigger: { trigger: ".hw-title", start: "top 85%" },
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      });
+      gsap.fromTo(
+        ".hw-title",
+        { y: 40, opacity: 0 },
+        {
+          scrollTrigger: { trigger: ".hw-title", start: "top 85%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        }
+      );
 
       gsap.utils.toArray<HTMLElement>(".hw-row").forEach((row) => {
         const text = row.querySelector(".hw-text");
         const phone = row.querySelector(".hw-phone");
-        gsap.from(text, {
-          scrollTrigger: { trigger: row, start: "top 78%" },
-          x: -30,
-          opacity: 0,
-          duration: 0.7,
-          ease: "power3.out",
-        });
-        gsap.from(phone, {
-          scrollTrigger: { trigger: row, start: "top 78%" },
-          y: 50,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power3.out",
-        });
+        gsap.fromTo(
+          text,
+          { x: -30, opacity: 0 },
+          {
+            scrollTrigger: { trigger: row, start: "top 78%" },
+            x: 0,
+            opacity: 1,
+            duration: 0.7,
+            ease: "power3.out",
+          }
+        );
+        gsap.fromTo(
+          phone,
+          { y: 50, opacity: 0 },
+          {
+            scrollTrigger: { trigger: row, start: "top 78%" },
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out",
+          }
+        );
       });
     },
     { scope: sectionRef }

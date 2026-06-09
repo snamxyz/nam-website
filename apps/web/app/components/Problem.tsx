@@ -34,21 +34,29 @@ export default function Problem() {
 
   useGSAP(
     () => {
-      gsap.from(".problem-title", {
-        scrollTrigger: { trigger: ".problem-title", start: "top 85%" },
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      });
-      gsap.from(".problem-card", {
-        scrollTrigger: { trigger: ".problem-grid", start: "top 82%" },
-        y: 40,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.12,
-        ease: "power3.out",
-      });
+      gsap.fromTo(
+        ".problem-title",
+        { y: 40, opacity: 0 },
+        {
+          scrollTrigger: { trigger: ".problem-title", start: "top 85%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        }
+      );
+      gsap.fromTo(
+        ".problem-card",
+        { y: 40, opacity: 0 },
+        {
+          scrollTrigger: { trigger: ".problem-grid", start: "top 82%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.12,
+          ease: "power3.out",
+        }
+      );
     },
     { scope: sectionRef }
   );

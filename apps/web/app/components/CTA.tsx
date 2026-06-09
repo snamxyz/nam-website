@@ -15,13 +15,17 @@ export default function CTA() {
 
   useGSAP(
     () => {
-      gsap.from(".cta-card", {
-        scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      });
+      gsap.fromTo(
+        ".cta-card",
+        { y: 50, opacity: 0 },
+        {
+          scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        }
+      );
     },
     { scope: sectionRef }
   );

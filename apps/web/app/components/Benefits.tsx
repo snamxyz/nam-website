@@ -14,13 +14,13 @@ const benefits = [
     icon: Zap,
     title: "Paid daily",
     description:
-      "Upload a receipt today and NAM Coin lands in your wallet tomorrow. No statements, no waiting weeks for a payout.",
+      "Upload a receipt today and NAM lands in your wallet tomorrow. No statements, no waiting weeks for a payout.",
   },
   {
     icon: InfinityIcon,
     title: "Rewards that never expire",
     description:
-      "Your NAM Coin is a real on-chain asset you own outright. It can't be clawed back, timed out, or quietly devalued.",
+      "NAM is a real on-chain asset you own outright. It can’t be clawed back, timed out, or expired.",
   },
   {
     icon: Banknote,
@@ -41,29 +41,41 @@ export default function Benefits() {
 
   useGSAP(
     () => {
-      gsap.from(".benefit-head", {
-        scrollTrigger: { trigger: ".benefit-head", start: "top 85%" },
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      });
-      gsap.from(".benefit-row", {
-        scrollTrigger: { trigger: ".benefit-list", start: "top 82%" },
-        x: -30,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.12,
-        ease: "power3.out",
-      });
-      gsap.from(".benefit-phone", {
-        scrollTrigger: { trigger: ".benefit-phones", start: "top 80%" },
-        y: 50,
-        opacity: 0,
-        duration: 0.9,
-        stagger: 0.15,
-        ease: "power3.out",
-      });
+      gsap.fromTo(
+        ".benefit-head",
+        { y: 40, opacity: 0 },
+        {
+          scrollTrigger: { trigger: ".benefit-head", start: "top 85%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        }
+      );
+      gsap.fromTo(
+        ".benefit-row",
+        { x: -30, opacity: 0 },
+        {
+          scrollTrigger: { trigger: ".benefit-list", start: "top 82%" },
+          x: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.12,
+          ease: "power3.out",
+        }
+      );
+      gsap.fromTo(
+        ".benefit-phone",
+        { y: 50, opacity: 0 },
+        {
+          scrollTrigger: { trigger: ".benefit-phones", start: "top 80%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          stagger: 0.15,
+          ease: "power3.out",
+        }
+      );
     },
     { scope: sectionRef }
   );
@@ -113,7 +125,7 @@ export default function Benefits() {
           <div className="benefit-phone relative z-10 -rotate-3">
             <PhoneMockup
               src="/assets/app-token-nam.png"
-              alt="NAM Coin price chart and balance in the app"
+              alt="NAM price chart and balance in the app"
               className="w-[230px] md:w-[250px]"
             />
           </div>

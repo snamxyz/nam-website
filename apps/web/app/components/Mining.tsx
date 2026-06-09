@@ -32,7 +32,7 @@ const steps = [
     icon: Coins,
     title: "Tokens distributed",
     description:
-      "NAM Coin is mined on-chain and deposited straight into your in-app wallet the next day. Real ownership.",
+      "NAM is mined on-chain and deposited straight into your in-app wallet the next day. Real ownership.",
   },
 ];
 
@@ -41,28 +41,40 @@ export default function Mining() {
 
   useGSAP(
     () => {
-      gsap.from(".mining-title", {
-        scrollTrigger: { trigger: ".mining-title", start: "top 85%" },
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      });
-      gsap.from(".mining-step", {
-        scrollTrigger: { trigger: ".mining-steps", start: "top 82%" },
-        y: 40,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.12,
-        ease: "power3.out",
-      });
-      gsap.from(".mining-example", {
-        scrollTrigger: { trigger: ".mining-example", start: "top 85%" },
-        y: 30,
-        opacity: 0,
-        duration: 0.7,
-        ease: "power3.out",
-      });
+      gsap.fromTo(
+        ".mining-title",
+        { y: 40, opacity: 0 },
+        {
+          scrollTrigger: { trigger: ".mining-title", start: "top 85%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        }
+      );
+      gsap.fromTo(
+        ".mining-step",
+        { y: 40, opacity: 0 },
+        {
+          scrollTrigger: { trigger: ".mining-steps", start: "top 82%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.12,
+          ease: "power3.out",
+        }
+      );
+      gsap.fromTo(
+        ".mining-example",
+        { y: 30, opacity: 0 },
+        {
+          scrollTrigger: { trigger: ".mining-example", start: "top 85%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          ease: "power3.out",
+        }
+      );
     },
     { scope: sectionRef }
   );
@@ -71,7 +83,7 @@ export default function Mining() {
     <section
       id="mining"
       ref={sectionRef}
-      className="relative py-24 md:py-32 px-6 overflow-hidden"
+      className="relative  overflow-hidden"
     >
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] glow-radial pointer-events-none" />
 

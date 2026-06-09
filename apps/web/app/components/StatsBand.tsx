@@ -125,14 +125,18 @@ export default function StatsBand() {
 
   useGSAP(
     () => {
-      gsap.from(".stat-item", {
-        scrollTrigger: { trigger: sectionRef.current, start: "top 85%" },
-        y: 24,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power3.out",
-      });
+      gsap.fromTo(
+        ".stat-item",
+        { y: 24, opacity: 0 },
+        {
+          scrollTrigger: { trigger: sectionRef.current, start: "top 85%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power3.out",
+        }
+      );
     },
     { scope: sectionRef }
   );
