@@ -21,9 +21,10 @@ export default function TokenomicsPage() {
       <Navbar />
       <main>
         <TokenHero />
-        <TokenEarning />
-        <TokenParameters />
         <Mining />
+        <TokenEarning />
+        {/* <TokenParameters /> */}
+        
         <TokenAllocation />
         <TokenSupply />
         <TokenUtility />

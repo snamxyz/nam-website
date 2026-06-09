@@ -221,12 +221,12 @@ export default function TokenHero() {
           </span>
         </div>
 
-        <div className="th-cta mt-8">
+        {/* <div className="th-cta mt-8">
           <DownloadButton platform="ios" className="btn-primary text-base group">
             Start Earning NAM
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
           </DownloadButton>
-        </div>
+        </div> */}
 
         {/* Spec chips */}
         <div className="mt-12 w-full grid grid-cols-2 sm:grid-cols-4 gap-3">
