@@ -285,6 +285,74 @@ body {
 }
 
 /* ----------------------------------------------------------------------- */
+/* Blog prose                                                              */
+/* ----------------------------------------------------------------------- */
+
+.blog-prose {
+  color: rgba(10, 11, 12, 0.78);
+  line-height: 1.75;
+  font-size: 1rem;
+}
+
+.blog-prose > * + * {
+  margin-top: 1.25rem;
+}
+
+.blog-prose h2 {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.blog-prose h3 {
+  margin-top: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.blog-prose p {
+  color: rgba(10, 11, 12, 0.72);
+}
+
+.blog-prose a {
+  color: var(--nam-green-deep);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.blog-prose ul,
+.blog-prose ol {
+  padding-left: 1.5rem;
+}
+
+.blog-prose ul {
+  list-style: disc;
+}
+
+.blog-prose ol {
+  list-style: decimal;
+}
+
+.blog-prose li + li {
+  margin-top: 0.5rem;
+}
+
+.blog-prose img {
+  width: 100%;
+  border-radius: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.blog-prose strong {
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+/* ----------------------------------------------------------------------- */
 /* Reduced motion                                                          */
 /* ----------------------------------------------------------------------- */
 

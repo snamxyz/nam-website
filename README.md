@@ -70,6 +70,11 @@ Set these on the public web project:
 - `NEXT_PUBLIC_SITE_URL`
 - `WEBHOOK_SECRET`
 - `IP_HASH_SALT`
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `AWS_REGION`
+- `AWS_S3_BUCKET`
+- `AWS_S3_PUBLIC_URL`
 
 Set these on the admin project:
 
@@ -77,6 +82,23 @@ Set these on the admin project:
 - `SESSION_SECRET`
 - `ADMIN_PASSWORD`
 - `NEXT_PUBLIC_SITE_URL`
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `AWS_REGION`
+- `AWS_S3_BUCKET`
+- `AWS_S3_PUBLIC_URL`
 
 For the admin project, `NEXT_PUBLIC_SITE_URL` must point to the public site
 domain so generated referral links use the public `/ref/[slug]` route.
+
+### AWS S3 (blog images)
+
+Blog cover images and inline editor images are uploaded to S3 from the admin
+app. Set the AWS variables on both the admin and public web projects if you want
+uploads and rendering to work in each environment.
+
+- `AWS_S3_BUCKET` — bucket name
+- `AWS_S3_PUBLIC_URL` — base URL for public reads (for example a CloudFront
+  domain or `https://<bucket>.s3.<region>.amazonaws.com`)
+- Configure the bucket so objects under `blog/` are publicly readable, or serve
+  them through a CDN with public access.

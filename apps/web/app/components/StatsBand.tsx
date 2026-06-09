@@ -70,12 +70,12 @@ const fetchNamTokenPriceUsd = async (signal: AbortSignal) => {
 const buildStats = (totalNamEarned: number, tokenPriceUsd: number) => [
   {
     value: totalNamEarned,
-    label: "Total NAM Earned",
+    label: "Total NAM Paid",
     format: formatNamMillions,
   },
   {
     value: totalNamEarned * tokenPriceUsd,
-    label: "Value of NAM Earned",
+    label: "Value Paid Out",
     format: (value: number) => usdFormatter.format(value),
   },
   {

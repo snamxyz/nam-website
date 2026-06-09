@@ -11,12 +11,15 @@ export default function AdminPanelLayout({
       <header className="border-b border-nam-border bg-nam-dark/80">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-6">
-            <Link href="/" className="text-lg font-semibold text-nam-green">
+            <Link href="/campaigns" className="text-lg font-semibold text-nam-green">
               NAM Admin
             </Link>
             <nav className="flex gap-4 text-sm text-foreground/70">
-              <Link href="/" className="transition hover:text-foreground">
+              <Link href="/campaigns" className="transition hover:text-foreground">
                 Campaigns
+              </Link>
+              <Link href="/blogs" className="transition hover:text-foreground">
+                Blogs
               </Link>
             </nav>
           </div>

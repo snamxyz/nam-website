@@ -151,7 +151,7 @@ export async function createCampaign(
     },
   });
 
-  revalidatePath("/");
+  revalidatePath("/campaigns");
   redirect(`/campaigns/${campaign.id}`);
 }
 
@@ -166,7 +166,7 @@ export async function archiveCampaign(formData: FormData) {
     data: { archivedAt: new Date() },
   });
 
-  revalidatePath("/");
+  revalidatePath("/campaigns");
   revalidatePath(`/campaigns/${id}`);
 }
 
@@ -181,7 +181,7 @@ export async function restoreCampaign(formData: FormData) {
     data: { archivedAt: null, status: CampaignStatus.ACTIVE },
   });
 
-  revalidatePath("/");
+  revalidatePath("/campaigns");
   revalidatePath(`/campaigns/${id}`);
 }
 

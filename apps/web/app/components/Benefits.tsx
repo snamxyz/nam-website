@@ -92,14 +92,14 @@ export default function Benefits() {
         {/* Left — copy + benefit list */}
         <div>
           <div className="benefit-head max-w-xl">
-            <span className="eyebrow mb-4">Rewards that belong to you</span>
+            <span className="eyebrow mb-4">The Solution</span>
             <h2 className="text-3xl sm:text-4xl md:text-[2.75rem] font-bold tracking-tight leading-[1.1] text-balance">
               Real rewards you{" "}
               <span className="text-gradient-green">actually own.</span>
             </h2>
             <p className="mt-4 text-foreground/50 text-base md:text-lg leading-relaxed">
               NAM isn&apos;t a point balance with an expiry date. It&apos;s
-              an asset in your wallet — and the value is determined by the market of everyday people.
+              an asset in your wallet — and the value is determined by the market.
             </p>
           </div>
 

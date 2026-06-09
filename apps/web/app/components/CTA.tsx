@@ -46,11 +46,10 @@ export default function CTA() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] text-balance">
             Your next receipt is
             <br className="hidden sm:block" />{" "}
-            <span className="text-gradient-green">already worth something.</span>
+            <span className="text-gradient-green">worth something.</span>
           </h2>
           <p className="mt-5 text-foreground/55 text-base md:text-lg max-w-lg mx-auto leading-relaxed">
-            Download NAM Rewards, scan a receipt, and watch real crypto land in
-            your wallet tomorrow. Free to start — no investment required.
+            Download NAM Rewards, scan a receipt, and watch real earnings land in your wallet daily. Free to earn — no in-app spending required.  
           </p>
 
           <div className="mt-9 flex flex-col sm:flex-row gap-3.5 justify-center">

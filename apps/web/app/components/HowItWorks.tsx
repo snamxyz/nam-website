@@ -17,7 +17,7 @@ const steps = [
     title: "Sign up with your number",
     description:
       "Enter your mobile number and a secure crypto wallet is created for you in seconds, powered by Privy. No seed phrases, no jargon, no crypto experience required.",
-    chip: "Wallet ready in under a minute",
+    chip: " Ready to earn in under a minute",
     image: "/assets/app-wallet.png",
     alt: "NAM Rewards home screen with balance and daily rewards",
   },
@@ -26,8 +26,8 @@ const steps = [
     number: "02",
     title: "Scan receipts you already have",
     description:
-      "Snap a photo of any receipt from purchases you already make — coffee, groceries, gas, takeout. Our system reads and verifies it automatically. That's the whole job.",
-    chip: "Free — you're already spending the money",
+      "Snap a photo of any receipt from purchases you already make — coffee, groceries, gas, takeout. Our system reads and verifies it automatically.",
+    chip: "Free to earn — upload receipts on money you already spent",
     image: "/assets/app-scan.png",
     alt: "Receipt scanner framing a receipt inside the app",
   },
@@ -105,7 +105,7 @@ export default function HowItWorks() {
               Three steps. <span className="text-gradient-green">That&apos;s it.</span>
             </>
           }
-          subtitle="From signup to your first payout — earning crypto has never been this simple."
+          subtitle="From signup to your first payout — earning has never been this simple."
         />
 
         <div className="mt-16 md:mt-24 flex flex-col gap-20 md:gap-28">

@@ -32,7 +32,7 @@ export default async function CampaignDetailPage({
     <div className="space-y-8">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <Link href="/" className="text-sm text-foreground/60 hover:text-foreground">
+          <Link href="/campaigns" className="text-sm text-foreground/60 hover:text-foreground">
             ← Back to creators
           </Link>
           <h1 className="mt-3 text-2xl font-semibold">{stats.name}</h1>

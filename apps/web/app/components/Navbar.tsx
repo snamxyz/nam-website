@@ -137,7 +137,7 @@ export default function Navbar() {
               height={28}
               className="w-7 h-7 rounded-lg"
             />
-            <span className="text-base font-bold tracking-tight">NAM</span>
+            <span className="text-base font-bold tracking-tight">NAM Rewards</span>
           </Link>
 
           {/* Desktop */}

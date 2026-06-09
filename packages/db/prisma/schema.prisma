@@ -25,6 +25,11 @@ enum ClickEventType {
   DOWNLOAD_ANDROID
 }
 
+enum BlogPostStatus {
+  DRAFT
+  PUBLISHED
+}
+
 model Campaign {
   id              String         @id @default(cuid())
   name            String
@@ -102,4 +107,19 @@ model ConversionEvent {
   @@index([campaignId])
   @@index([slug])
   @@index([type, slug, externalUserId])
+}
+
+model BlogPost {
+  id            String         @id @default(cuid())
+  title         String
+  slug          String         @unique
+  description   String
+  coverImageUrl String?
+  content       Json
+  status        BlogPostStatus @default(DRAFT)
+  publishedAt   DateTime?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@index([status, publishedAt])
 }
