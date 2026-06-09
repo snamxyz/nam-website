@@ -2,23 +2,29 @@ import type { Metadata } from "next";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Mining from "../components/Mining";
-import Tokenomics from "../components/Tokenomics";
-import CryptoFeatures from "../components/CryptoFeatures";
+import TokenHero from "../components/token/TokenHero";
+import TokenParameters from "../components/token/TokenParameters";
+import TokenAllocation from "../components/token/TokenAllocation";
+import TokenSupply from "../components/token/TokenSupply";
+import TokenUtility from "../components/token/TokenUtility";
 
 export const metadata: Metadata = {
-  title: "Token & Tokenomics — NAM Rewards",
+  title: "Tokenomics — NAM",
   description:
-    "How NAM is mined from receipts, daily supply and distribution, and the built-in crypto wallet for buying, sending, and swapping tokens.",
+    "$NAM is the native token of the NAM network — mined from real receipts on Base. See the supply model, daily allocation, emission curve, and what you can do with it.",
 };
 
 export default function TokenomicsPage() {
   return (
     <>
       <Navbar />
-      <main className="pt-28">
+      <main>
+        <TokenHero />
+        <TokenParameters />
         <Mining />
-        <Tokenomics />
-        <CryptoFeatures />
+        <TokenAllocation />
+        <TokenSupply />
+        <TokenUtility />
       </main>
       <Footer />
     </>

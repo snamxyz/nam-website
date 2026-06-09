@@ -83,7 +83,7 @@ export default function Mining() {
     <section
       id="mining"
       ref={sectionRef}
-      className="relative  overflow-hidden"
+      className="relative overflow-hidden px-6 lg:px-0"
     >
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] glow-radial pointer-events-none" />
 
