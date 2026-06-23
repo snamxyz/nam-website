@@ -75,8 +75,8 @@ const buildStats = (totalNamEarned: number, tokenPriceUsd: number) => [
   },
   {
     value: totalNamEarned * tokenPriceUsd,
-    label: "Value Paid Out",
-    format: (value: number) => usdFormatter.format(value),
+    label: "Value Paid Out (current NAM price)",
+    format: (value: number) => `${usdFormatter.format(value)}+`,
   },
   {
     value: NAM_DAILY_DISTRIBUTION,

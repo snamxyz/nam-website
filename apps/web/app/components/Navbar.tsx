@@ -13,8 +13,8 @@ import DownloadButton from "@/app/components/DownloadButton";
 gsap.registerPlugin(ScrollTrigger);
 
 const navLinks = [
+  { label: "Features", href: "/#problems" },
   { label: "How It Works", href: "/#how-it-works" },
-  { label: "Rewards", href: "/#rewards" },
   { label: "Tokenomics", href: "/tokenomics" },
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/faq" },

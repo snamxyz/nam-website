@@ -62,9 +62,10 @@ export default function Problem() {
   );
 
   return (
-    <section ref={sectionRef} className="relative py-24 md:py-32 px-6">
+    <section ref={sectionRef} id="problems" className="relative py-24 md:py-32 px-6">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
+
           className="problem-title"
           eyebrow="The problem"
           title={
