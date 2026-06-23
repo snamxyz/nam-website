@@ -58,7 +58,7 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-1 max-w-xs">
             <Link href="/" className="flex items-center gap-2.5">
               <Image
-                src="/assets/icon.svg"
+                src="/assets/SVG.svg"
                 alt="NAM Rewards"
                 width={28}
                 height={28}

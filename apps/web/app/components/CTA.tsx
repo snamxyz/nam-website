@@ -37,7 +37,7 @@ export default function CTA() {
        
         <div className="relative">
           <Image
-            src="/assets/icon.svg"
+            src="/assets/SVG.svg"
             alt="NAM Rewards"
             width={56}
             height={56}

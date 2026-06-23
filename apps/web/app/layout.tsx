@@ -27,8 +27,8 @@ export const metadata: Metadata = {
     "decentralized finance",
   ],
   icons: {
-    icon: "/assets/icon.svg",
-    apple: "/assets/icon.png",
+    icon: "/assets/SVG.svg",
+    apple: "/assets/SVG.svg",
   },
   openGraph: {
     title: "NAM Rewards — Mine Crypto From Your Receipts",

@@ -86,7 +86,7 @@ export default function Comparison() {
             </span>
             <div className="flex flex-col items-center gap-1">
               <Image
-                src="/assets/icon.svg"
+                src="/assets/SVG.svg"
                 alt="NAM Rewards"
                 width={24}
                 height={24}

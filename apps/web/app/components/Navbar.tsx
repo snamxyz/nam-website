@@ -131,7 +131,7 @@ export default function Navbar() {
         <div className="px-3 pl-5 py-2.5 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
             <Image
-              src="/assets/icon.svg"
+              src="/assets/SVG.svg"
               alt="NAM Rewards"
               width={28}
               height={28}
