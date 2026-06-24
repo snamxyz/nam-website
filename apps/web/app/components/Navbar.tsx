@@ -7,7 +7,7 @@ import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import DownloadButton from "@/app/components/DownloadButton";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -15,6 +15,10 @@ gsap.registerPlugin(ScrollTrigger);
 const navLinks = [
   { label: "Features", href: "/#problems" },
   { label: "How It Works", href: "/#how-it-works" },
+];
+
+const resourceLinks = [
+  { label: "Token", href: "/token" },
   { label: "Tokenomics", href: "/tokenomics" },
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/faq" },
@@ -93,6 +97,8 @@ export default function Navbar() {
     "text-sm text-foreground/65 hover:text-nam-green transition-colors duration-200";
   const mobileLinkClassName =
     "text-2xl font-medium text-foreground/80 hover:text-nam-green transition-colors";
+  const dropdownLinkClassName =
+    "block rounded-2xl px-4 py-3 text-sm font-medium text-foreground/65 transition-colors hover:bg-nam-green/5 hover:text-nam-green";
 
   const renderNavLink = (link: (typeof navLinks)[number], mobile = false) => {
     const className = mobile ? mobileLinkClassName : linkClassName;
@@ -143,6 +149,27 @@ export default function Navbar() {
           {/* Desktop */}
           <div className="hidden md:flex items-center gap-7">
             {navLinks.map((link) => renderNavLink(link))}
+            <div className="group relative">
+              <button
+                type="button"
+                className="flex items-center gap-1.5 text-sm text-foreground/65 transition-colors duration-200 hover:text-nam-green"
+                aria-haspopup="true"
+              >
+                Resources
+                <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180" />
+              </button>
+              <div className="invisible absolute left-1/2 top-full z-50 mt-4 w-48 -translate-x-1/2 rounded-3xl glass-strong p-2 opacity-0 shadow-xl transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                {resourceLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={dropdownLinkClassName}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="hidden md:block">
@@ -169,6 +196,23 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 md:hidden">
           {navLinks.map((link) => renderNavLink(link, true))}
+          <div className="flex flex-col items-center gap-4">
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-nam-green-deep">
+              Resources
+            </p>
+            <div className="flex flex-col items-center gap-5">
+              {resourceLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={mobileLinkClassName}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
           <Link
             href="/terms"
             onClick={() => setMobileOpen(false)}

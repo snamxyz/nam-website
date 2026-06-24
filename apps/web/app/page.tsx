@@ -3,6 +3,7 @@ import Hero from "./components/Hero";
 import StatsBand from "./components/StatsBand";
 import Problem from "./components/Problem";
 import Benefits from "./components/Benefits";
+import EarlyRewards from "./components/EarlyRewards";
 import HowItWorks from "./components/HowItWorks";
 import Comparison from "./components/Comparison";
 import CTA from "./components/CTA";
@@ -17,6 +18,7 @@ export default function Home() {
         <StatsBand />
         <Problem />
         <Benefits />
+        <EarlyRewards />
         <HowItWorks />
         <Comparison />
         <CTA />

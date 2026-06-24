@@ -108,13 +108,16 @@ export default function TokenAllocation() {
   );
 
   // Cumulative offsets so arcs sit head-to-tail around the circle
-  let cumulative = 0;
-  const arcs = allocation.map((s) => {
-    const len = (s.percent / 100) * C;
-    const rotation = (cumulative / 100) * 360 - 90; // start at top
-    cumulative += s.percent;
-    return { ...s, len, rotation };
-  });
+  const arcs = allocation.reduce<Array<Slice & { len: number; rotation: number }>>(
+    (items, s) => {
+      const cumulative = items.reduce((sum, item) => sum + item.percent, 0);
+      const len = (s.percent / 100) * C;
+      const rotation = (cumulative / 100) * 360 - 90; // start at top
+
+      return [...items, { ...s, len, rotation }];
+    },
+    []
+  );
 
   return (
     <section ref={sectionRef} className="relative py-20 md:py-28 px-6 overflow-hidden">

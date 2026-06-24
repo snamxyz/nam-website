@@ -3,8 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { Flame, Coins, ArrowRight } from "lucide-react";
-import DownloadButton from "@/app/components/DownloadButton";
+import { Flame, Coins } from "lucide-react";
 
 const NAM_TOKEN_CONTRACT_ADDRESS = "0xd7C767DeF449C0C7ce76Af96AB4B5b3C518B80d4";
 const DEXSCREENER_TOKEN_URL = `https://api.dexscreener.com/latest/dex/tokens/${NAM_TOKEN_CONTRACT_ADDRESS}`;

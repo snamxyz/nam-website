@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { Star, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import DownloadButton from "@/app/components/DownloadButton";
 import HeroFloaters from "@/app/components/HeroFloaters";
 
